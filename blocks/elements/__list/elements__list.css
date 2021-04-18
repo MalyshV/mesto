@@ -1,0 +1,10 @@
+.elements__list {
+  display: grid;
+  grid-template-columns: repeat(3, 282px);
+  gap: 17px;
+}
+
+.elements__list:last-child {
+  margin: 0;
+  padding: 0;
+}

@@ -1,0 +1,10 @@
+.element {
+  list-style: none;
+  width: 282px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0;
+  background-color: #FFFFFF;
+  margin-left: 0;
+}
+
