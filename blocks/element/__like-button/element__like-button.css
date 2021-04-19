@@ -1,0 +1,13 @@
+.element__like-button:hover {
+  opacity: 0.5;
+  transition: opacity .5s ease-in-out;
+}
+
+.element__like-button:active {
+  color: #000000;
+}
+
+.element__like-button {
+  border: none;
+  background-color: #ffffff;
+}
