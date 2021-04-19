@@ -18,7 +18,7 @@
       <div class="profile__info">
         <div class="profile__change">
           <h1 class="profile__user-name">Жак-Ив Кусто</h1>
-          <a class="profile__edit-button" href="#" target="_blank">
+          <a class="profile__edit-button" href="#">
           <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path stroke="#fff" d="M.5.5h23v23H.5z"/><path d="M17 8.328l-7.396 7.439-1.321-1.348L15.66 7 17 8.328zM7 17l1.962-.588-1.377-1.328L7 17z" fill="#fff"/></svg>
           </a>
         </div>
@@ -91,7 +91,20 @@
   <footer class="footer body__container">
     <p class="footer__text">&copy; 2021 Mesto Russia</p>
   </footer>
-  <script src="./script.js"></script>
+  <div class="popup">
+    <div class="popup__content">
+      <a href="#" class="popup__close">
+        <svg width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M28.57.287L16 12.857 3.43.287.286 3.429 12.857 16 .287 28.57l3.142 3.143L16 19.143l12.57 12.57 3.144-3.142L19.143 16l12.57-12.57L28.572.286z" fill="#fff"/></svg>
+      </a>
+      <fieldset class="input-container">
+        <label for="heading" class="input-container__label">Редактировать профиль</label>
+        <input type="text" class="input-container__item" placeholder="Жак-Ив Кусто">
+        <input type="text" class="input-container__item" placeholder="Исследователь океана">
+        <button type="submit" class="input-container__button">Сохранить</button>
+      </fieldset>
+    </div>
+  </div>
+  <script src="./scripts/index.js" defer></script>
 
 </body>
 </html>
