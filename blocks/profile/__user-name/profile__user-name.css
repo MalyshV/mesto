@@ -10,3 +10,10 @@
   overflow: hidden;
   max-width: 294px;
 }
+
+@media (max-width: 425px) {
+  .profile__user-name {
+    font-size: 27px;
+    line-height: 33px;
+  }
+}

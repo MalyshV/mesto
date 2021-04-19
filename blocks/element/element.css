@@ -5,6 +5,10 @@
   overflow: hidden;
   margin: 0;
   background-color: #FFFFFF;
-  margin-left: 0;
 }
 
+@media (max-width: 768px) {
+  .element{
+    align-self: center;
+  }
+}

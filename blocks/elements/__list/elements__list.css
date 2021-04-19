@@ -1,8 +1,10 @@
 .elements__list {
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, 282px);
-  column-gap: 17px;
+  justify-content: space-between;
   row-gap: 20px;
+  justify-items: center;
 }
 
 .elements__list:last-child {

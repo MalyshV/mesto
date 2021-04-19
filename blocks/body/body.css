@@ -14,3 +14,9 @@
   font-family: 'Inter', Arial, sans-serif;
   color: #FFFFFF;
 }
+
+/*@media (max-width: 1024px) {
+  .body {
+    padding: 28px 19px 36px;
+  }
+}*/
