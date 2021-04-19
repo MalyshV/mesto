@@ -1,6 +1,6 @@
-const openPopupButton = document.querySelector('.profile__edit-button');
-const popup = document.querySelector('.popup');
-const closePopupButton = document.querySelector('.popup__close');
+let openPopupButton = document.querySelector('.profile__edit-button');
+let popup = document.querySelector('.popup');
+let closePopupButton = document.querySelector('.popup__close');
 
 function togglePopup(event) {
   event.preventDefault();
@@ -17,6 +17,3 @@ function handleOverlayClick(event) {
 }
 
 popup.addEventListener('click', handleOverlayClick);
-
-
-
