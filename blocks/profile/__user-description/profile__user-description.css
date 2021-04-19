@@ -5,4 +5,9 @@
   font-size: 18px;
   line-height: 22px;
   margin-top: 16px;
+  align-items: flex-end;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 336px;
 }
