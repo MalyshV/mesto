@@ -3,3 +3,9 @@
   width: 120px;
   height: 120px;
 }
+
+@media (max-width: 700px) {
+  .profile__image {
+    margin-bottom: 22px;
+  }
+}
