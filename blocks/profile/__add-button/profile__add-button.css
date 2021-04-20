@@ -1,5 +1,11 @@
 .profile__add-button {
-  max-width: 150px;
+  border-radius: 2px;
+  border: 2px solid #FFFFFF;
+  width: 150px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .profile__add-button:hover {
@@ -9,6 +15,7 @@
 
 @media (max-width: 700px) {
   .profile__add-button {
+    width: 282px;
     margin-top: 36px;
   }
 }
