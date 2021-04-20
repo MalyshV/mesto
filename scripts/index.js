@@ -17,3 +17,21 @@ function handleOverlayClick(event) {
 }
 
 popup.addEventListener('click', handleOverlayClick);
+
+
+let formElement = document.querySelector('.input-container');
+
+document.querySelector('.input-container__button').onclick = changeInfo;
+
+function changeInfo(event) {
+  event.preventDefault();
+  let name = document.querySelector('.input-container__item').value;
+  let job = document.querySelector('.input-container__item_about').value;
+
+  document.querySelector('.profile__user-name').textContent = name;
+  document.querySelector('.profile__user-description').textContent = job;
+
+  togglePopup()
+}
+
+formElement.addEventListener('submit', changeInfo);
