@@ -3,3 +3,9 @@
   margin: auto;
   border: 0;
 }
+
+@media (max-width: 425px) {
+  .input-container {
+    max-width: 238px;
+  }
+}

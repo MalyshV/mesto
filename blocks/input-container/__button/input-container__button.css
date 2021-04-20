@@ -18,3 +18,12 @@
 .input-container__button:hover {
   opacity: 0.8;
 }
+
+@media (max-width: 425px) {
+  .input-container__button {
+    max-width: 238px;
+    margin-top: 45px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

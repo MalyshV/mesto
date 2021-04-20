@@ -5,6 +5,9 @@
   box-sizing: border-box;
   border-bottom: 1px solid #bcbcc4;
   background-color: transparent;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -12,4 +15,14 @@
   font-family: inherit;
   color: inherit;
   margin-top: 48px;
+
+}
+
+@media (max-width: 425px) {
+  .input-container__item {
+    font-size: 14px;
+    line-height: 17px;
+    margin-top: 48px;
+  }
+
 }

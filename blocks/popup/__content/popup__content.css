@@ -9,3 +9,11 @@
   padding: 34px 0 37px;
   color: black;
 }
+
+@media (max-width: 425px) {
+  .popup__content {
+    max-width: 282px;
+    min-height: 322px;
+    padding: 25px 0;
+  }
+}

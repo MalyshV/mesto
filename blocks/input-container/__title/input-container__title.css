@@ -7,3 +7,13 @@
   line-height: 29px;
   max-width: 330px;
 }
+
+@media (max-width: 425px) {
+  .input-container__title {
+    font-size: 18px;
+    line-height: 22px;
+    margin-left: 25px;
+    max-width: 238px;
+  }
+
+}

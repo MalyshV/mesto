@@ -4,5 +4,13 @@
   border-radius: 10px;
   overflow: hidden;
   margin: 0;
+  box-sizing: border-box;
   background-color: #FFFFFF;
-}
+  }
+
+  /*@media (max-width: 320px) {
+    .element {
+      margin-left: 33px;
+    }
+  }
+*/
