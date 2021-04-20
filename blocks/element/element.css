@@ -6,9 +6,3 @@
   margin: 0;
   background-color: #FFFFFF;
 }
-
-@media (max-width: 768px) {
-  .element{
-    align-self: center;
-  }
-}

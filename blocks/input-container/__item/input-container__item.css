@@ -13,7 +13,3 @@
   color: inherit;
   margin-top: 48px;
 }
-
-.input-container__item:focus {
-  outline-color: #fff6c5;
-}

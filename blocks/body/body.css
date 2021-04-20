@@ -1,8 +1,8 @@
 .body {
-  margin: 0;
-  padding: 0;
+  margin: 0 auto;
+  padding-top: 45px;
+  padding-bottom: 60px;
   min-width: 320px;
-  /*max-width: 1280px;*/
   background: #000000;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -12,11 +12,4 @@
   text-rendering: optimizeLegibility;
   font-family: 'Inter', Arial, sans-serif;
   color: #FFFFFF;
-  border: 1px dashed grey;
 }
-
-/*@media (max-width: 1024px) {
-  .body {
-    padding: 28px 19px 36px;
-  }
-}*/

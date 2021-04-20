@@ -11,6 +11,10 @@
   color: #ffffff;
   background-color: #000000;
   font-family: inherit;
-  border-radius: 2%;
+  border-radius: 2px;
   margin-top: 48px;
+}
+
+.input-container__button:hover {
+  opacity: 0.8;
 }
