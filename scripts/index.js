@@ -25,8 +25,8 @@ document.querySelector('.input-container__button').onclick = changeInfo;
 
 function changeInfo(event) {
   event.preventDefault();
-  let name = document.querySelector('.input-container__item').value;
-  let job = document.querySelector('.input-container__item_about').value;
+  let name = document.querySelector('.input-container__name').value;
+  let job = document.querySelector('.input-container__job').value;
 
   document.querySelector('.profile__user-name').textContent = name;
   document.querySelector('.profile__user-description').textContent = job;
