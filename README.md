@@ -21,5 +21,5 @@
 
 -----
 
-* Ссылка на GitHub Pages [https://malyshv.github.io/mesto/index.html]
+* Ссылка на GitHub Pages [https://malyshv.github.io/mesto/]
 
