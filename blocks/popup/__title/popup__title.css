@@ -1,4 +1,4 @@
-.input-container__title {
+.popup__title {
   margin: 0;
   margin-left: 36px;
   font-style: normal;
@@ -9,7 +9,7 @@
 }
 
 @media (max-width: 425px) {
-  .input-container__title {
+  .popup__title {
     font-size: 18px;
     line-height: 22px;
     margin-left: 25px;
