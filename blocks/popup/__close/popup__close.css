@@ -2,9 +2,8 @@
   align-self: flex-start;
   position: absolute;
   width: 40px;
-  height: 40px;
-  top: -33px;
-  right: -45px;
+  top: -30px;
+  right: -30px;
   object-fit: cover;
 }
 
@@ -16,7 +15,7 @@
 @media (max-width: 425px) {
   .popup__close {
     width: 26px;
-    height: 26px;
-    right: 0;
+    top: -26px;
+    right: -6px;
   }
 }

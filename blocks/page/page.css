@@ -1,8 +1,12 @@
-.body {
+.page {
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding-top: 45px;
   padding-bottom: 60px;
   min-width: 320px;
+  max-width: 1280px;
   background: #000000;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -15,7 +19,7 @@
 }
 
 @media (max-width: 1024px) {
-  .body {
+  .page {
     padding: 28px 19px 36px;
   }
 }
