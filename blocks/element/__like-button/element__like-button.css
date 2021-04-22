@@ -1,8 +1,5 @@
 .element__like-button {
   background-image: url(../../../images/LikeButton.svg);
-  background-color: transparent;
-  border: none;
-  outline: none;
   background-size: contain;
   background-repeat: no-repeat;
   width: 22px;
@@ -14,8 +11,8 @@
   transition: opacity .5s ease-in-out;
 }
 
-/*.element__like-button:active {
+.element__like-button:active {
   background-image: url(../../../images/LikeButtonBlack.svg);
   opacity: 1;
   transition: none;
-}*/
+}
