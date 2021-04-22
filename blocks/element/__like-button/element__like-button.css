@@ -14,6 +14,8 @@
   transition: opacity .5s ease-in-out;
 }
 
-.element__like-button:focus {
-  color: black;
-}
+/*.element__like-button:active {
+  background-image: url(../../../images/LikeButtonBlack.svg);
+  opacity: 1;
+  transition: none;
+}*/
