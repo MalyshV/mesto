@@ -1,10 +1,15 @@
 .popup__close {
   align-self: flex-start;
   position: absolute;
-  width: 40px;
-  top: -30px;
-  right: -30px;
-  object-fit: cover;
+  width: 45px;
+  height: 45px;
+  top: -50px;
+  right: -37px;
+  object-fit: contain;
+  background-image: url(../../../images/CloseIcon.svg);
+  background-color: transparent;
+  border: 0;
+  outline: none;
 }
 
 .popup__close:hover {
