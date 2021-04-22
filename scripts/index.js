@@ -1,33 +1,35 @@
 let openPopupButton = document.querySelector('.profile__edit-button');
 let popup = document.querySelector('.popup');
 let closePopupButton = document.querySelector('.popup__close');
-let closeFormButton = document.querySelector('.input-container__button');
 let formElement = document.querySelector('.input-container');
+let submitFormButton = document.querySelector('.input-container__button');
+let nameInput = document.querySelector('[name="user-name"]');
+let jobInput = document.querySelector('[name="user-job"]');
+let profileName = document.querySelector('.profile__user-name');
+let profileJob = document.querySelector('.profile__user-job');
 
-openPopupButton.addEventListener('click', togglePopup);
-closeFormButton.addEventListener('click', togglePopup);
-closePopupButton.addEventListener('click', togglePopup);
-popup.addEventListener('click', handleOverlayClick);
-formElement.addEventListener('submit', changeInfo);
+openPopupButton.addEventListener('click', openPopup);
+submitFormButton.addEventListener('click', formSubmitHandler);
+closePopupButton.addEventListener('click', closePopup);
 
-function togglePopup(event) {
+function openPopup(event) {
   event.preventDefault();
-  popup.classList.toggle('popup_is-opened');
+  popup.classList.add('popup_is-opened');
+
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
 }
 
-function handleOverlayClick(event) {
-  if (event.target === event.currentTarget) {
-    togglePopup(event);
-  }
+function closePopup(event) {
+  event.preventDefault();
+  popup.classList.remove('popup_is-opened');
 }
 
-document.querySelector('.input-container__button').onclick = changeInfo;
-
-function changeInfo(event) {
+function formSubmitHandler(event) {
   event.preventDefault();
-  let name = document.querySelector('.input-container__name').value;
-  let job = document.querySelector('.input-container__job').value;
 
-  document.querySelector('.profile__user-name').textContent = name;
-  document.querySelector('.profile__user-description').textContent = job;
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
+
+  popup.classList.remove('popup_is-opened');
 }

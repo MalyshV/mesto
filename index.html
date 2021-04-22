@@ -19,7 +19,7 @@
             <h1 class="profile__user-name">Жак-Ив Кусто</h1>
             <button class="profile__edit-button buttons" type="button"></button>
           </div>
-          <p class="profile__user-description">Исследователь океана</p>
+          <p class="profile__user-job">Исследователь океана</p>
         </div>
       </div>
       <button class="profile__add-button buttons" type="submit"></button>
@@ -78,10 +78,10 @@
     <div class="popup__content">
       <button class="popup__close buttons" type="button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form name="profile-form">
+      <form action="#" name="profile-form">
         <fieldset class="input-container">
-          <input type="text" class="input-container__name" placeholder="Имя" value="Жак-Ив Кусто">
-          <input type="text" class="input-container__job" placeholder="О себе" value="Исследователь океана">
+          <input class="input-container__item" type="text" name="user-name"  placeholder="Имя" value="Ваня" tabindex="1">
+          <input class="input-container__item" type="text" name="user-job" placeholder="Профессия" value="Кондитер" tabindex="2">
           <button type="submit" class="input-container__button buttons"></button>
         </fieldset>
       </form>
