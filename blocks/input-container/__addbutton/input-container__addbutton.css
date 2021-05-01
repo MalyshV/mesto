@@ -1,0 +1,20 @@
+.input-container__addbutton {
+  background-image: url(../../../images/CreateButton.svg);
+  background-repeat: no-repeat;
+  margin-top: 48px;
+  width: 358px;
+  height: 50px;
+}
+
+.input-container__button:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 425px) {
+  .input-container__addbutton {
+    background-image: url(../../../images/CreateButtonSmall.svg);
+    margin-top: 45px;
+    width: 238px;
+    height: 46px;
+  }
+}

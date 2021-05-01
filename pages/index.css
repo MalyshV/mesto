@@ -40,5 +40,6 @@
 @import url(../blocks/input-container/input-container.css);
 @import url(../blocks/input-container/__item/input-container__item.css);
 @import url(../blocks/input-container/__button/input-container__button.css);
+@import url(../blocks/input-container/__addbutton/input-container__addbutton.css);
 
 @import url(../blocks/content/content.css);
