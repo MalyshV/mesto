@@ -62,3 +62,9 @@ function addNewCard(event) {
 
   popup_card.classList.remove('popup_is-opened');
 }
+
+const cardRemoveButton = document.querySelector('.element__delete-button');
+
+cardRemoveButton.addEventListener('click', function(e) {
+  e.target.closest('.element').remove();
+})
