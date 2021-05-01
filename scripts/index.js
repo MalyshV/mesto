@@ -3,7 +3,6 @@ const popup = document.querySelector('#popup');
 const popup_card = document.querySelector('#popup_card');
 const closePopupButton = document.querySelector('.popup__close');
 const formElement = document.querySelector('[name="profile-form"]');
-//const formElementCard = document.querySelector('[name="card-form"]');
 const openPopupCardButton = document.querySelector('.profile__add-button');
 const closePopupCardButton = document.querySelector('#button');
 const addNewCardButton = document.querySelector('.input-container__addbutton');
@@ -21,8 +20,7 @@ closePopupButton.addEventListener('click', closePopup);
 closePopupCardButton.addEventListener('click', closePopupCard);
 formElement.addEventListener('submit', formSubmitHandler);
 openPopupCardButton.addEventListener('click', openPopupCard);
-
-
+addNewCardButton.addEventListener('click', addNewCard);
 
 function openPopup(event) {
   event.preventDefault();
@@ -33,11 +31,6 @@ function openPopup(event) {
 }
 
 function closePopup(event) {
-  event.preventDefault();
-  popup.classList.remove('popup_is-opened');
-}
-
-function closeAddPopup(event) {
   event.preventDefault();
   popup.classList.remove('popup_is-opened');
 }
@@ -69,5 +62,3 @@ function addNewCard(event) {
 
   popup_card.classList.remove('popup_is-opened');
 }
-
-addNewCardButton.addEventListener('click', addNewCard);
