@@ -34,46 +34,6 @@
             <button class="element__delete-button page__buttons" type="reset"></button>
           </div>
         </li>
-        <li class="element">
-          <img class="element__image" src="images/kirill-pershin-1404681-unsplash.png" alt="Вид на гору вдали">
-          <div class="element__description">
-            <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="element__like-button page__buttons" type="button"></button>
-          </div>
-          <button class="element__delete-button page__buttons" type="reset"></button>
-        </li>
-        <li class="element">
-          <img class="element__image" src="images/kirill-pershin-1556355-unsplash.png" alt="Горы и леса Домбая">
-          <div class="element__description">
-            <h2 class="element__title">Домбай</h2>
-            <button class="element__like-button page__buttons" type="button"></button>
-            <button class="element__delete-button page__buttons" type="reset"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" src="images/kirill-pershin-1404681-unsplash.png" alt="Вид на гору вдали">
-          <div class="element__description">
-            <h2 class="element__title">Гора Эльбрус</h2>
-            <button class="element__like-button page__buttons" type="button"></button>
-            <button class="element__delete-button page__buttons" type="reset"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" src="images/kirill-pershin-1556355-unsplash.png" alt="Горы и леса Домбая">
-          <div class="element__description">
-            <h2 class="element__title">Домбай</h2>
-            <button class="element__like-button page__buttons" type="button"></button>
-            <button class="element__delete-button page__buttons" type="reset"></button>
-          </div>
-        </li>
-        <li class="element">
-          <img class="element__image" src="images/kirill-pershin-1088404-unsplash.jpg" alt="Старая церковь в горах">
-          <div class="element__description">
-            <h2 class="element__title">Карачаево-Черкессия</h2>
-            <button class="element__like-button page__buttons" type="button"></button>
-            <button class="element__delete-button page__buttons" type="reset"></button>
-          </div>
-        </li>
       </ul>
     </section>
   </main>
@@ -93,7 +53,6 @@
       </form>
     </div>
   </div>
-  <!--Новый попап-->
   <div class="popup" id="popup_card">
     <div class="popup__content">
       <button class="popup__close page__buttons" id="button" type="button"></button>
@@ -107,6 +66,18 @@
       </form>
     </div>
   </div>
+
+  <template id="card-template">
+    <li class="element">
+      <img class="element__image" src="images/kirill-pershin-1088404-unsplash.jpg" alt="Старая церковь в горах">
+      <div class="element__description">
+        <h2 class="element__title">Карачаевск</h2>
+        <button class="element__like-button page__buttons" type="button"></button>
+        <button class="element__delete-button page__buttons" type="reset"></button>
+      </div>
+    </li>
+  </template>
+
   <script src="./scripts/index.js" defer></script>
 </body>
 </html>
