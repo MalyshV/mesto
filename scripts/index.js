@@ -6,31 +6,19 @@ const closePopupButton = document.querySelector('.popup__close');
 const formElement = document.querySelector('[name="profile-form"]');
 const openPopupCardButton = document.querySelector('.profile__add-button');
 const closePopupCardButton = document.querySelector('#button');
-const placeInput = document.querySelector('[name="name"]'); // название из инпута
-const imageInput = document.querySelector('[name="link"]'); // ссылка из инпута
-const placeTitle = document.querySelector('.element__title'); // название из темплейта
-const placeImage = document.querySelector('.element__image'); // ссылка из темплейта
+const placeInput = document.querySelector('[name="name"]');
+const imageInput = document.querySelector('[name="link"]');
 let nameInput = document.querySelector('[name="user-name"]');
 let jobInput = document.querySelector('[name="user-job"]');
 let profileName = document.querySelector('.profile__user-name');
 let profileJob = document.querySelector('.profile__user-job');
-const createCardButton = document.querySelector('.input-container__addbutton');
-
-/*createCardButton.addEventListener('click', function() {
-  const cardValue = input.value;
-  const newCard = cardTemplate.content.querySelector('.element').cloneNode(true);
-
-  const cardName = newCard.querySelector('.element__title');
-  cardName.textContent = cardValue;
-
-  cardContainer.append(newCard);
-});*/
 
 openPopupButton.addEventListener('click', openPopup);
 closePopupButton.addEventListener('click', closePopup);
 closePopupCardButton.addEventListener('click', closePopupCard);
-formElement.addEventListener('submit', formSubmitHandler);
+formElement.addEventListener('submit', handleFormSubmit);
 openPopupCardButton.addEventListener('click', openPopupCard);
+popup_card.addEventListener('submit', handleCardFormSubmit);
 
 const initialCards = [
   {
@@ -59,7 +47,7 @@ const initialCards = [
   }
 ];
 
-// Вывод карточек на страницу:
+// Вывод карточек на страницу
 const container = document.querySelector('.elements'); // div
 const cardContainer = container.querySelector('.elements__list'); // ul, в который добавляем
 const cardTemplate = document.querySelector('#card-template'); // темплейт
@@ -88,37 +76,7 @@ initialCards.forEach(function (currentItem) {
   cardContainer.append(addCard);
 });
 
-// Не работает пока !!!
-
-function handleCardFormSubmit(event) {
-  event.preventDefault();
-
-  const addCard = createCard(title, link);
-
-  title = placeInput.Value;
-  link = imageInput.Value;
-
-  cardContainer.prepend(addCard);
-
-  closePopupCard();
-
-  placeInput.value = '';
-  imageInput.value = '';
-}
-
-popup_card.addEventListener('submit', handleCardFormSubmit);
-
-// Редактирование попапа с карточкой:
-function openPopupCard(event) {
-  event.preventDefault();
-  popup_card.classList.add('popup_is-opened');
-}
-
-function closePopupCard() {
-  popup_card.classList.remove('popup_is-opened');
-}
-
-// Редактирования профиля:
+// Редактирования профиля
 function openPopup(event) {
   event.preventDefault();
   popup.classList.add('popup_is-opened');
@@ -131,7 +89,7 @@ function closePopup() {
   popup.classList.remove('popup_is-opened');
 }
 
-function formSubmitHandler(event) {
+function handleFormSubmit(event) {
   event.preventDefault();
 
   profileName.textContent = nameInput.value;
@@ -140,7 +98,33 @@ function formSubmitHandler(event) {
   popup.classList.remove('popup_is-opened');
 }
 
-// 3. Фнукции для попапа с фото большого размера: открыть, закрыть.
+// Редактирование карточек
+function openPopupCard(event) {
+  event.preventDefault();
+  popup_card.classList.add('popup_is-opened');
+}
+
+function closePopupCard() {
+  popup_card.classList.remove('popup_is-opened');
+}
+
+function handleCardFormSubmit(event) {
+  event.preventDefault();
+
+  const title = placeInput.value;
+  const link = imageInput.value;
+
+  const addCard = createCard(title, link);
+
+  cardContainer.prepend(addCard);
+
+  closePopupCard();
+
+  placeInput.value = '';
+  imageInput.value = '';
+}
+
+// Фнукции для попапа с фото большого размера: открыть, закрыть.
 /*const popupImage = document.querySelector('.element__image');
 
 function openPopupImage(event) {
@@ -153,13 +137,5 @@ function openPopupImage(event) {
 }
 
 popupImage.addEventListener('click', openPopupImage);*/
-
-// let placeName = document.querySelector('.element__title');
-// let placeImage = document.querySelector('.element__image');
-
-/*const createCardButton = document.querySelector('.input-container__addbutton');
-//const input = document.querySelector('.input-container');
-const cardContainer = document.querySelector('.elements__list');
-const cardTemplate = document.querySelector('#card-template');*/
 
 
