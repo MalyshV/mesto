@@ -6,20 +6,16 @@ const closePopupButton = document.querySelector('.popup__close');
 const formElement = document.querySelector('[name="profile-form"]');
 const openPopupCardButton = document.querySelector('.profile__add-button');
 const closePopupCardButton = document.querySelector('#button');
-const addCardButton = document.querySelector('.input-container__addbutton');
 let nameInput = document.querySelector('[name="user-name"]');
 let jobInput = document.querySelector('[name="user-job"]');
 let profileName = document.querySelector('.profile__user-name');
 let profileJob = document.querySelector('.profile__user-job');
-let placeInput = document.querySelector('[name="name"]');
-let imageInput = document.querySelector('[name="link"]');
 
 openPopupButton.addEventListener('click', openPopup);
 closePopupButton.addEventListener('click', closePopup);
 closePopupCardButton.addEventListener('click', closePopupCard);
 formElement.addEventListener('submit', formSubmitHandler);
 openPopupCardButton.addEventListener('click', openPopupCard);
-/*addCardButton.addEventListener('click', createCard);*/
 
 
 /*
@@ -61,19 +57,36 @@ const initialCards = [
 ];
 
 // Вывод карточек на страницу:
-const container = document.querySelector('.elements');
-const cardContainer = container.querySelector('.elements__list');
+const container = document.querySelector('.elements'); // div
+const cardContainer = container.querySelector('.elements__list'); // ul, в который добавляем
+const cardTemplate = document.querySelector('#card-template'); // темплейт
+const addCardButton = document.querySelector('.input-container__addbutton'); // кнока Создать в попапе
 
-const cardTemplate = document.querySelector('#card-template').content;
+function createCard(elem) {
+  const newCard = cardTemplate.content.querySelector('.element').cloneNode(true);
+  const cardRemoveButton = newCard.querySelector('.element__delete-button');
+  const likeButton = document.querySelector('.element__like-button');
 
-initialCards.forEach(function (elem) {
-  const card = cardTemplate.cloneNode(true);
+  newCard.querySelector('.element__title').textContent = elem.name;
+  newCard.querySelector('.element__image').src = elem.link;
 
-  card.querySelector('.element__title').textContent = elem.name;
-  card.querySelector('.element__image').src = elem.link;
+  cardRemoveButton.addEventListener('click', function(event) {
+    event.target.closest('.element').remove();
+  });
 
-  cardContainer.append(card)
+  newCard.querySelector('.element__like-button').addEventListener('click', function (event) {
+    event.target.classList.toggle('element__like-button_active');
+  });
+
+  return newCard;
+}
+
+initialCards.forEach(function (currentItem) {
+  const addCard = createCard(currentItem);
+
+  cardContainer.append(addCard);
 })
+
 
 
 // 1. Функции для редактирования профиля: открыть, закрыть, сохранить. Все работает.
