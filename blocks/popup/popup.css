@@ -8,6 +8,8 @@
   left: 0;
   bottom: 0;
   right: 0;
-  display: none;
   z-index: 2;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.6s ease-in-out;
 }

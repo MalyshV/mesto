@@ -17,18 +17,6 @@ closePopupCardButton.addEventListener('click', closePopupCard);
 formElement.addEventListener('submit', formSubmitHandler);
 openPopupCardButton.addEventListener('click', openPopupCard);
 
-
-/*
-function createCard(titleValue, photoValue) {
-  const cardTemplate = document.querySelector('#card-template');
-  const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
-
-  cardElement.querySelector('.element__title').textContent = initialCards.name;
-  cardElement.querySelector('.element__image').src = initialCards.link;
-
-  cardContainer.append(cardElement);
-}*/
-
 const initialCards = [
   {
     name: 'Карачаево-Черкесия',
@@ -87,9 +75,7 @@ initialCards.forEach(function (currentItem) {
   cardContainer.append(addCard);
 })
 
-
-
-// 1. Функции для редактирования профиля: открыть, закрыть, сохранить. Все работает.
+// 1. Функции для редактирования профиля:
 function openPopup(event) {
   event.preventDefault();
   popup.classList.add('popup_is-opened');
@@ -115,11 +101,11 @@ function formSubmitHandler(event) {
 function openPopupCard(event) {
   event.preventDefault();
   popup_card.classList.add('popup_is-opened');
-} // работает
+}
 
 function closePopupCard() {
   popup_card.classList.remove('popup_is-opened');
-} // работает
+}
 
 /*function addPhotoSubmitHandler(event) {
   event.preventDefault();
@@ -151,33 +137,6 @@ function openPopupImage(event) {
 }
 
 /*popupImage.addEventListener('click', openPopupImage);*/ // Пока закрыла!!!
-
-
-// 4. Удалить карточку - Доработать
-/*const cardRemoveButton = document.querySelector('.element__delete-button');
-
-cardRemoveButton.addEventListener('click', function(e) {
-  e.target.closest('.element').remove();
-});
-
-
-// 5. Лайк карточке
-
-// Все ниже пока закрываю. Разбираюсь с добавлением на страницу карточки
-
-/*function createCard(titleValue, photoValue) {
-  const initialCardsList = document.querySelector('.elements__list'); // это <ul>
-  const initialCardTemplate = document.querySelector('#card-template').content; // это template
-
-  const initialCardElement = initialCardTemplate.cloneNode(true);
-
-
-  initialCardElement.querySelector('.element__title').textContent = titleValue;
-  initialCardElement.querySelector('.element__image').src = photoValue;
-
-  initialCardsList.append(initialCardElement);
-}*/
-
 
 // let placeName = document.querySelector('.element__title');
 // let placeImage = document.querySelector('.element__image');
@@ -211,19 +170,3 @@ createCardButton.addEventListener('click', function() {
   elementsList.append(cardElement);
   popup_card.classList.add('popup_is-opened');
 }*/
-
-/* лайк карточки: - ДОРАБОТАТЬ
-
-Урок 8: объект event: Внутри функции addsong
-
- songElement.querySelector('.song__like').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('song__like_active');
-  });
-
-const likeButton = document.querySelector('.element__like-button');
-
-function likeCard(event) {
-  event.target.classList.toggle('element__like-button_active');
-}
-
-likeButton.addEventListener('click', likeCard);*/
