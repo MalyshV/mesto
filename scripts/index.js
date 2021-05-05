@@ -59,7 +59,6 @@ const initialCards = [
 function createCard(title, link) {
   const newCard = cardTemplate.content.querySelector('.element').cloneNode(true);
   const cardRemoveButton = newCard.querySelector('.element__delete-button');
-
   const photo = newCard.querySelector('.element__image');
   photo.addEventListener('click', openPhotoPopup);
 
