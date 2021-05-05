@@ -5,6 +5,7 @@
   height: 45px;
   top: -50px;
   right: -37px;
+  transition: visibility 0s, opacity 0.6s ease-in-out;
 }
 
 .popup__close:hover {
