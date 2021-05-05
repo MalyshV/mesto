@@ -1,4 +1,4 @@
-.input-container__addbutton {
+.input-container__submit {
   background-image: url(../../../images/CreateButton.svg);
   background-repeat: no-repeat;
   margin-top: 48px;
@@ -6,12 +6,12 @@
   height: 50px;
 }
 
-.input-container__button:hover {
+.input-container__submit:hover {
   opacity: 0.8;
 }
 
 @media (max-width: 425px) {
-  .input-container__addbutton {
+  .input-container__submit {
     background-image: url(../../../images/CreateButtonSmall.svg);
     margin-top: 45px;
     width: 238px;
