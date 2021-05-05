@@ -34,7 +34,7 @@
   </footer>
 
   <div class="popup" id="popup">
-    <div class="popup__content">
+    <div class="popup__content popup__content_theme_input">
       <button class="popup__close page__buttons" type="button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
       <form action="#" name="profile-form">
@@ -48,7 +48,7 @@
   </div>
 
   <div class="popup" id="popup_card">
-    <div class="popup__content">
+    <div class="popup__content popup__content_theme_input">
       <button class="popup__close page__buttons" id="button" type="button"></button>
       <h2 class="popup__title">Новое место</h2>
       <form action="#" name="card-form">
@@ -62,18 +62,18 @@
   </div>
 
   <div class="popup" id="popup_photo">
-    <div class="popup__content">
-      <button class="popup__close page__buttons" id="button" type="button"></button>
-      <figure>
-        <img class="popup__image" src="" alt="">
-        <figcaption class ="popup__text">Карачаевск</figcaption>
-      </figure>
+    <div class="popup__content popup__content_theme_photo">
+      <button class="popup__close page__buttons" id="button_photo" type="button"></button>
+      <figure class="popup__figure">
+        <img class="popup__image" src="images/kirill-pershin-1088404-unsplash.jpg" alt="Старая церковь в горах">
+        <figcaption class="popup__text">Test</figcaption>
+       </figure>
     </div>
   </div>
 
   <template id="card-template">
     <li class="element">
-      <img class="element__image" id="111" src="images/kirill-pershin-1088404-unsplash.jpg" alt="Старая церковь в горах">
+      <img class="element__image" src="images/kirill-pershin-1088404-unsplash.jpg" alt="Старая церковь в горах">
       <div class="element__description">
         <h2 class="element__title">Карачаевск</h2>
         <button class="element__like-button page__buttons" type="button"></button>
