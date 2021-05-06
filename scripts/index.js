@@ -16,6 +16,7 @@ const nameInput = document.querySelector('[name="user-name"]');
 const jobInput = document.querySelector('[name="user-job"]');
 const profileName = document.querySelector('.profile__user-name');
 const profileJob = document.querySelector('.profile__user-job');
+const popupCardForm = document.querySelector('[name="card-form"]');
 
 openPopupButton.addEventListener('click', openPopup);
 closePopupButton.addEventListener('click', closePopup);
@@ -129,8 +130,7 @@ function handleCardFormSubmit(event) {
 
   cardContainer.prepend(createCard(title, link, alt));
 
-  placeInput.value = '';
-  imageInput.value = '';
+  popupCardForm.reset();
 
   closePopupCard();
 }
