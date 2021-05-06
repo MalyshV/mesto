@@ -50,8 +50,7 @@ initialCards.forEach(function (currentItem) {
 });
 
 // Действия с профилем
-function openPopup(event) {
-  event.preventDefault();
+function openPopup() {
   popup.classList.add('popup_is-opened');
 
   nameInput.value = profileName.textContent;
@@ -80,8 +79,7 @@ function removeCard(event) {
   event.target.closest('.element').remove();
 }
 
-function openPopupCard(event) {
-  event.preventDefault();
+function openPopupCard() {
   popupCard.classList.add('popup_is-opened');
 }
 
@@ -104,8 +102,7 @@ function handleCardFormSubmit(event) {
 }
 
 //Действия с попапом-картинкой
-function openPhotoPopup(event) {
-  event.preventDefault();
+function openPhotoPopup() {
   popupPhoto.classList.add('popup_is-opened');
 
   const bigPhoto = document.querySelector('.popup__image');
@@ -115,7 +112,6 @@ function openPhotoPopup(event) {
   bigPhotoTitle.textContent = event.target.alt;
 }
 
-function closePhotoPopup(event) {
-  event.preventDefault();
+function closePhotoPopup() {
   popupPhoto.classList.remove('popup_is-opened');
 }
