@@ -18,15 +18,6 @@ const profileName = document.querySelector('.profile__user-name');
 const profileJob = document.querySelector('.profile__user-job');
 const popupCardForm = document.querySelector('[name="card-form"]');
 
-popupProfileOpenButton.addEventListener('click', openPopup);
-popupProfileCloseButton.addEventListener('click', closePopup);
-popupCardCloseButton.addEventListener('click', closePopupCard);
-popupPhotoCloseButton.addEventListener('click', closePhotoPopup);
-formElement.addEventListener('submit', handleFormSubmit);
-popupCardOpendButton.addEventListener('click', openPopupCard);
-popupCard.addEventListener('submit', handleCardFormSubmit);
-
-
 // Клонирование и наполнение карточек
 function createCard(title, link, alt) {
   const newCard = cardTemplate.content.querySelector('.element').cloneNode(true);
@@ -43,11 +34,6 @@ function createCard(title, link, alt) {
 
   return newCard;
 }
-
-// Вывод карточек на страницу
-initialCards.forEach(function (currentItem) {
-  cardContainer.append(createCard(currentItem.name, currentItem.link, currentItem.alt));
-});
 
 // Действия с профилем
 function openPopup() {
@@ -115,3 +101,16 @@ function openPhotoPopup() {
 function closePhotoPopup() {
   popupPhoto.classList.remove('popup_is-opened');
 }
+
+popupProfileOpenButton.addEventListener('click', openPopup);
+popupProfileCloseButton.addEventListener('click', closePopup);
+popupCardCloseButton.addEventListener('click', closePopupCard);
+popupPhotoCloseButton.addEventListener('click', closePhotoPopup);
+popupCardOpendButton.addEventListener('click', openPopupCard);
+popupCard.addEventListener('submit', handleCardFormSubmit);
+formElement.addEventListener('submit', handleFormSubmit);
+
+// Вывод карточек на страницу
+initialCards.forEach(function (currentItem) {
+  cardContainer.append(createCard(currentItem.name, currentItem.link, currentItem.alt));
+});
