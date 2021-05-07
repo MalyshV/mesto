@@ -68,7 +68,7 @@ function handleCardFormSubmit(event) {
 
   popupCardForm.reset();
 
-  closePopupCard();
+  closeCardPopup();
 }
 
 function createCard(title, link, alt) {
