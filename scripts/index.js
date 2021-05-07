@@ -39,7 +39,7 @@ function closeProfilePopup() {
   closePopup(popupProfile);
 }
 
-function handleFormProfileSubmit(event) {
+function handleProfileFormSubmit(event) {
   event.preventDefault();
 
   profileName.textContent = nameInput.value;
@@ -116,7 +116,7 @@ popupCardOpendButton.addEventListener('click', openCardPopup);
 popupCardCloseButton.addEventListener('click', closeCardPopup);
 popupPhotoCloseButton.addEventListener('click', closePhotoPopup);
 popupCard.addEventListener('submit', handleCardFormSubmit);
-formElement.addEventListener('submit', handleFormProfileSubmit);
+formElement.addEventListener('submit', handleProfileFormSubmit);
 
 // Вывод карточек на страницу
 initialCards.forEach(function (currentItem) {
