@@ -110,6 +110,9 @@ function closePhotoPopup() {
   closePopup(popupPhoto);
 }
 
+
+enableValidation();
+
 popupProfileOpenButton.addEventListener('click', openProfilePopup);
 popupProfileCloseButton.addEventListener('click', closeProfilePopup);
 popupCardOpendButton.addEventListener('click', openCardPopup);
