@@ -110,9 +110,18 @@ function closePhotoPopup() {
   closePopup(popupPhoto);
 }
 
+// Закытие на оверлей
+
+
+function handleOverlayClick(event) {
+  if (event.target === event.currentTarget) {
+    closePopup(popup);
+  }
+}
 
 enableValidation();
 
+popup.addEventListener('click', handleOverlayClick);
 popupProfileOpenButton.addEventListener('click', openProfilePopup);
 popupProfileCloseButton.addEventListener('click', closeProfilePopup);
 popupCardOpendButton.addEventListener('click', openCardPopup);
