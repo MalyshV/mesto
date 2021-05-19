@@ -111,17 +111,30 @@ function closePhotoPopup() {
 }
 
 // Закытие на оверлей
-
-
-function handleOverlayClick(event) {
+/*function handleOverlayClick(event) {
   if (event.target === event.currentTarget) {
     closePopup(popup);
   }
-}
+}*/
+
+const overlay = Array.from(document.querySelectorAll('.popup'));
+
+overlay.forEach((element) => {
+  element.addEventListener('click', (evt) => {
+    if (evt.target === evt.currentTarget) {
+      closePopup(element);
+    }
+  })
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      closePopup(element);
+    }
+  })
+});
 
 enableValidation();
 
-popup.addEventListener('click', handleOverlayClick);
+/*popup.addEventListener('click', handleOverlayClick);*/
 popupProfileOpenButton.addEventListener('click', openProfilePopup);
 popupProfileCloseButton.addEventListener('click', closeProfilePopup);
 popupCardOpendButton.addEventListener('click', openCardPopup);
