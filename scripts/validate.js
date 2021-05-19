@@ -50,7 +50,7 @@ const setEventListeners = (formElement) => {
   });
   const inputList = Array.from(formElement.querySelectorAll('.input-container__item'));
   //find submit button
-  const buttonElement = formElement.querySelector('.form__submit-button');
+  const buttonElement = formElement.querySelector('.input-container__button');
   // add listeners for each input
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
