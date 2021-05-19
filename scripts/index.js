@@ -18,13 +18,30 @@ const profileName = document.querySelector('.profile__user-name');
 const profileJob = document.querySelector('.profile__user-job');
 const popupCardForm = document.querySelector('[name="card-form"]');
 
-function openPopup(popup) {
+/*function openPopup(popup) {
   popup.classList.add('popup_is-opened');
-}
+  document.addEventListener('keydown', (element) => {
 
-function closePopup(popup) {
+  });
+}*/
+
+// closePopupOnEscape
+const closePopupOnEscape = event => {
+  if (event.key === 'Escape') {
+    const popupActive = document.querySelector('.popup_is-opened');
+    closePopup(popupActive);
+  }
+};
+
+const openPopup = (popup) => {
+  popup.classList.add('popup_is-opened');
+  document.addEventListener('keydown', closePopupOnEscape);
+};
+
+const closePopup = (popup) => {
   popup.classList.remove('popup_is-opened');
-}
+  document.removeEventListener('keydown', closePopupOnEscape);
+};
 
 // profile popup
 function openProfilePopup() {
@@ -110,7 +127,7 @@ function closePhotoPopup() {
 }
 
 // close popup via overlay & Escape
-const overlay = Array.from(document.querySelectorAll('.popup'));
+/*const overlay = Array.from(document.querySelectorAll('.popup'));
 
 overlay.forEach((element) => {
   element.addEventListener('click', (evt) => {
@@ -123,7 +140,7 @@ overlay.forEach((element) => {
       closePopup(element);
     }
   })
-});
+});*/
 
 enableValidation({
   formSelector: '.form',
