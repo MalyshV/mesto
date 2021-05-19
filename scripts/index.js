@@ -18,21 +18,6 @@ const profileName = document.querySelector('.profile__user-name');
 const profileJob = document.querySelector('.profile__user-job');
 const popupCardForm = document.querySelector('[name="card-form"]');
 
-/*function openPopup(popup) {
-  popup.classList.add('popup_is-opened');
-  document.addEventListener('keydown', (element) => {
-
-  });
-}*/
-
-// closePopupOnEscape
-const closePopupOnEscape = event => {
-  if (event.key === 'Escape') {
-    const popupActive = document.querySelector('.popup_is-opened');
-    closePopup(popupActive);
-  }
-};
-
 const openPopup = (popup) => {
   popup.classList.add('popup_is-opened');
   document.addEventListener('keydown', closePopupOnEscape);
@@ -43,19 +28,26 @@ const closePopup = (popup) => {
   document.removeEventListener('keydown', closePopupOnEscape);
 };
 
-// profile popup
-function openProfilePopup() {
+const closePopupOnEscape = event => {
+  if (event.key === 'Escape') {
+    const popupActive = document.querySelector('.popup_is-opened');
+    closePopup(popupActive);
+  }
+};
+
+// popupProfile functions
+const openProfilePopup = () => {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 
   openPopup(popupProfile);
 }
 
-function closeProfilePopup() {
+const closeProfilePopup = () => {
   closePopup(popupProfile);
 }
 
-function handleProfileFormSubmit(event) {
+const handleProfileFormSubmit = event => {
   event.preventDefault();
 
   profileName.textContent = nameInput.value;
@@ -64,16 +56,16 @@ function handleProfileFormSubmit(event) {
   closeProfilePopup();
 }
 
-// card popup
-function openCardPopup() {
+// popupCard functions
+const openCardPopup = () => {
   openPopup(popupCard);
 }
 
-function closeCardPopup() {
+const closeCardPopup = () => {
   closePopup(popupCard);
 }
 
-function handleCardFormSubmit(event) {
+const handleCardFormSubmit = event => {
   event.preventDefault();
 
   const title = placeInput.value;
@@ -87,7 +79,7 @@ function handleCardFormSubmit(event) {
   closeCardPopup();
 }
 
-function createCard(title, link, alt) {
+const createCard = (title, link, alt) => {
   const newCard = cardTemplate.content.querySelector('.element').cloneNode(true);
   const cardRemoveButton = newCard.querySelector('.element__delete-button');
   const photo = newCard.querySelector('.element__image');
@@ -103,16 +95,16 @@ function createCard(title, link, alt) {
   return newCard;
 }
 
-function addLike(event) {
+const addLike = event => {
   event.target.classList.toggle('element__like-button_active');
 }
 
-function removeCard(event) {
+const removeCard = event => {
   event.target.closest('.element').remove();
 }
 
-// image popup
-function openPhotoPopup(event) {
+// PopupPhoto functions
+const openPhotoPopup = event => {
   openPopup(popupPhoto);
 
   const bigPhoto = document.querySelector('.popup__image');
@@ -122,25 +114,9 @@ function openPhotoPopup(event) {
   bigPhotoTitle.textContent = event.target.alt;
 }
 
-function closePhotoPopup() {
+const closePhotoPopup = () => {
   closePopup(popupPhoto);
 }
-
-// close popup via overlay & Escape
-/*const overlay = Array.from(document.querySelectorAll('.popup'));
-
-overlay.forEach((element) => {
-  element.addEventListener('click', (evt) => {
-    if (evt.target === evt.currentTarget) {
-      closePopup(element);
-    }
-  })
-  document.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
-      closePopup(element);
-    }
-  })
-});*/
 
 enableValidation({
   formSelector: '.form',
@@ -158,7 +134,18 @@ popupPhotoCloseButton.addEventListener('click', closePhotoPopup);
 popupCard.addEventListener('submit', handleCardFormSubmit);
 formElement.addEventListener('submit', handleProfileFormSubmit);
 
-// create initial cards
+// Close on overlay
+const overlay = Array.from(document.querySelectorAll('.popup'));
+
+overlay.forEach((element) => {
+  element.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
+      closePopup(element);
+    }
+  })
+});
+
+// Create initial cards
 initialCards.forEach(function (currentItem) {
   cardContainer.append(createCard(currentItem.name, currentItem.link, currentItem.alt));
 });
