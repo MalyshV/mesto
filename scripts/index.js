@@ -18,7 +18,6 @@ const profileName = document.querySelector('.profile__user-name');
 const profileJob = document.querySelector('.profile__user-job');
 const popupCardForm = document.querySelector('[name="card-form"]');
 
-//Общие действия с попапами
 function openPopup(popup) {
   popup.classList.add('popup_is-opened');
 }
@@ -27,7 +26,7 @@ function closePopup(popup) {
   popup.classList.remove('popup_is-opened');
 }
 
-//Действия с попапом редатирования профиля
+// profile popup
 function openProfilePopup() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
@@ -48,7 +47,7 @@ function handleProfileFormSubmit(event) {
   closeProfilePopup();
 }
 
-//Действия с попапом редактирования карточек
+// card popup
 function openCardPopup() {
   openPopup(popupCard);
 }
@@ -95,7 +94,7 @@ function removeCard(event) {
   event.target.closest('.element').remove();
 }
 
-//Действия с попапом - большой картинкой
+// image popup
 function openPhotoPopup(event) {
   openPopup(popupPhoto);
 
@@ -110,7 +109,7 @@ function closePhotoPopup() {
   closePopup(popupPhoto);
 }
 
-// Закрытие на overlay и Escape
+// close popup via overlay & Escape
 const overlay = Array.from(document.querySelectorAll('.popup'));
 
 overlay.forEach((element) => {
@@ -126,11 +125,14 @@ overlay.forEach((element) => {
   })
 });
 
-enableValidation(
+enableValidation({
+  formSelector: '.form',
+  inputSelector: '.input-container__item',
+  submitButtonSelector: '.input-container__button',
+  inputErrorClass: 'input-container__item_type_error',
+  errorActiveClass: 'input-container__input-error_active',
+});
 
-);
-
-/*popup.addEventListener('click', handleOverlayClick);*/
 popupProfileOpenButton.addEventListener('click', openProfilePopup);
 popupProfileCloseButton.addEventListener('click', closeProfilePopup);
 popupCardOpendButton.addEventListener('click', openCardPopup);
@@ -139,7 +141,7 @@ popupPhotoCloseButton.addEventListener('click', closePhotoPopup);
 popupCard.addEventListener('submit', handleCardFormSubmit);
 formElement.addEventListener('submit', handleProfileFormSubmit);
 
-// Вывод карточек на страницу
+// create initial cards
 initialCards.forEach(function (currentItem) {
   cardContainer.append(createCard(currentItem.name, currentItem.link, currentItem.alt));
 });
