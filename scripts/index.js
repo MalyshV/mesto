@@ -110,13 +110,7 @@ function closePhotoPopup() {
   closePopup(popupPhoto);
 }
 
-// Закытие на оверлей
-/*function handleOverlayClick(event) {
-  if (event.target === event.currentTarget) {
-    closePopup(popup);
-  }
-}*/
-
+// Закрытие на overlay и Escape
 const overlay = Array.from(document.querySelectorAll('.popup'));
 
 overlay.forEach((element) => {
@@ -132,7 +126,9 @@ overlay.forEach((element) => {
   })
 });
 
-enableValidation();
+enableValidation(
+
+);
 
 /*popup.addEventListener('click', handleOverlayClick);*/
 popupProfileOpenButton.addEventListener('click', openProfilePopup);
