@@ -17,10 +17,14 @@ const jobInput = document.querySelector('[name="user-job"]');
 const profileName = document.querySelector('.profile__user-name');
 const profileJob = document.querySelector('.profile__user-job');
 const popupCardForm = document.querySelector('[name="card-form"]');
+const buttonElement = formElement.querySelector('.input-container__button');
+const inputList = Array.from(formElement.querySelectorAll('.input-container__item'));
 
 const openPopup = (popup) => {
   popup.classList.add('popup_is-opened');
   document.addEventListener('keydown', closePopupOnEscape);
+
+  toggleButtonState (buttonElement, inputList);
 };
 
 const closePopup = (popup) => {
@@ -32,6 +36,8 @@ const closePopupOnEscape = event => {
   if (event.key === 'Escape') {
     const popupActive = document.querySelector('.popup_is-opened');
     closePopup(popupActive);
+    popupCardForm.reset();
+    toggleButtonState (buttonElement, inputList);
   }
 };
 
@@ -41,11 +47,11 @@ const openProfilePopup = () => {
   jobInput.value = profileJob.textContent;
 
   openPopup(popupProfile);
-}
+};
 
 const closeProfilePopup = () => {
   closePopup(popupProfile);
-}
+};
 
 const handleProfileFormSubmit = event => {
   event.preventDefault();
@@ -54,16 +60,16 @@ const handleProfileFormSubmit = event => {
   profileJob.textContent = jobInput.value;
 
   closeProfilePopup();
-}
+};
 
 // popupCard functions
 const openCardPopup = () => {
   openPopup(popupCard);
-}
+};
 
 const closeCardPopup = () => {
   closePopup(popupCard);
-}
+};
 
 const handleCardFormSubmit = event => {
   event.preventDefault();
@@ -74,10 +80,9 @@ const handleCardFormSubmit = event => {
 
   cardContainer.prepend(createCard(title, link, alt));
 
-  popupCardForm.reset();
-
   closeCardPopup();
-}
+  popupCardForm.reset();
+};
 
 const createCard = (title, link, alt) => {
   const newCard = cardTemplate.content.querySelector('.element').cloneNode(true);
@@ -93,15 +98,15 @@ const createCard = (title, link, alt) => {
   newCard.querySelector('.element__like-button').addEventListener('click', addLike);
 
   return newCard;
-}
+};
 
 const addLike = event => {
   event.target.classList.toggle('element__like-button_active');
-}
+};
 
 const removeCard = event => {
   event.target.closest('.element').remove();
-}
+};
 
 // PopupPhoto functions
 const openPhotoPopup = event => {
@@ -112,11 +117,11 @@ const openPhotoPopup = event => {
 
   bigPhoto.src = event.target.src;
   bigPhotoTitle.textContent = event.target.alt;
-}
+};
 
 const closePhotoPopup = () => {
   closePopup(popupPhoto);
-}
+};
 
 enableValidation({
   formSelector: '.form',
@@ -141,6 +146,7 @@ overlay.forEach((element) => {
   element.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
       closePopup(element);
+      popupCardForm.reset();
     }
   })
 });
