@@ -21,6 +21,7 @@ const buttonElement = formElement.querySelector('.input-container__button');
 const inputList = Array.from(formElement.querySelectorAll('.input-container__item'));
 const bigPhoto = document.querySelector('.popup__image');
 const bigPhotoTitle = document.querySelector('.popup__text');
+const overlays = Array.from(document.querySelectorAll('.popup'));
 
 const openPopup = (popup) => {
   popup.classList.add('popup_is-opened');
@@ -140,12 +141,10 @@ popupCard.addEventListener('submit', handleCardFormSubmit);
 formElement.addEventListener('submit', handleProfileFormSubmit);
 
 // Close on overlay
-const overlays = Array.from(document.querySelectorAll('.popup'));
-
-overlays.forEach((element) => {
-  element.addEventListener('click', (evt) => {
+overlays.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
     if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
-      closePopup(element);
+      closePopup(popup);
     }
   })
 });
