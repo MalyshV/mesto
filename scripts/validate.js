@@ -20,16 +20,16 @@ const checkInputValidity = (formElement, inputElement, config) => {
   }
 };
 
-const hasInvalidInput = (inputList) => {
-  return inputList.some(inputElement => !inputElement.validity.valid)
-};
-
 const toggleButtonState = (buttonElement, inputList) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.disabled = true;
   } else {
     buttonElement.disabled = false;
   }
+};
+
+const hasInvalidInput = (inputList) => {
+  return inputList.some(inputElement => !inputElement.validity.valid)
 };
 
 const setEventListeners = (formElement, { inputSelector, submitButtonSelector, ...restConfig }) => {
