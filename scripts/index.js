@@ -23,6 +23,9 @@ const bigPhoto = document.querySelector('.popup__image');
 const bigPhotoTitle = document.querySelector('.popup__text');
 const overlays = Array.from(document.querySelectorAll('.popup'));
 
+console.log(popupCardForm);
+const form = popupCardForm.querySelectorAll
+
 const openPopup = (popup) => {
   popup.classList.add('popup_is-opened');
   document.addEventListener('keydown', closePopupOnEscape);
@@ -70,6 +73,18 @@ const openCardPopup = () => {
   const inputs = Array.from(popupCardForm.querySelectorAll('.input-container__item'));
 
   toggleButtonState(button, inputs);
+
+  // hide errors on open popups
+
+  /*const input = popupCardForm.querySelectorAll('.input-container__item');
+  console.log(input);
+  const inputErrorCl = popupCardForm.querySelector('.input-container__item_type_error');
+  console.log(inputErrorCl);
+  const errorActiveCl = popupCardForm.querySelector('.input-container__input-error_active');
+  console.log(errorActiveCl);
+  const errorEl = popupCardForm.querySelector(`#${input.id}-error`);
+  console.log(errorEl);
+  hideInputError(popupCardForm, input, { inputErrorCl, errorActiveCl });*/
 };
 
 const closeCardPopup = () => {
