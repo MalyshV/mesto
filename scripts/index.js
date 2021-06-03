@@ -1,3 +1,5 @@
+import { Card } from './Card.js';
+
 const popupProfileOpenButton = document.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('#popup');
 const popupCard = document.querySelector('#popup_card');
@@ -23,8 +25,11 @@ const bigPhoto = document.querySelector('.popup__image');
 const bigPhotoTitle = document.querySelector('.popup__text');
 const overlays = Array.from(document.querySelectorAll('.popup'));
 
-console.log(popupCardForm);
-const form = popupCardForm.querySelectorAll
+const createCard = (title, link) => {
+  const card = new Card(title, link, '#card-template');
+
+  return card.render();
+};
 
 const openPopup = (popup) => {
   popup.classList.add('popup_is-opened');
@@ -73,18 +78,6 @@ const openCardPopup = () => {
   const inputs = Array.from(popupCardForm.querySelectorAll('.input-container__item'));
 
   toggleButtonState(button, inputs);
-
-  // hide errors on open popups
-
-  /*const input = popupCardForm.querySelectorAll('.input-container__item');
-  console.log(input);
-  const inputErrorCl = popupCardForm.querySelector('.input-container__item_type_error');
-  console.log(inputErrorCl);
-  const errorActiveCl = popupCardForm.querySelector('.input-container__input-error_active');
-  console.log(errorActiveCl);
-  const errorEl = popupCardForm.querySelector(`#${input.id}-error`);
-  console.log(errorEl);
-  hideInputError(popupCardForm, input, { inputErrorCl, errorActiveCl });*/
 };
 
 const closeCardPopup = () => {
@@ -96,36 +89,12 @@ const handleCardFormSubmit = event => {
 
   const title = placeInput.value;
   const link = imageInput.value;
-  const alt = placeInput.value;
+  const alt =  placeInput.value;
 
   cardContainer.prepend(createCard(title, link, alt));
 
   popupCardForm.reset();
   closeCardPopup();
-};
-
-const createCard = (title, link, alt) => {
-  const newCard = cardTemplate.content.querySelector('.element').cloneNode(true);
-  const cardRemoveButton = newCard.querySelector('.element__delete-button');
-  const photo = newCard.querySelector('.element__image');
-
-  newCard.querySelector('.element__title').textContent = title;
-  photo.src = link;
-  photo.alt = alt;
-
-  photo.addEventListener('click', openPhotoPopup);
-  cardRemoveButton.addEventListener('click', removeCard);
-  newCard.querySelector('.element__like-button').addEventListener('click', addLike);
-
-  return newCard;
-};
-
-const addLike = event => {
-  event.target.classList.toggle('element__like-button_active');
-};
-
-const removeCard = event => {
-  event.target.closest('.element').remove();
 };
 
 // PopupPhoto functions
@@ -168,3 +137,5 @@ overlays.forEach((popup) => {
 initialCards.forEach(function (currentItem) {
   cardContainer.append(createCard(currentItem.name, currentItem.link, currentItem.alt));
 });
+
+export { openPopup, popupPhoto, bigPhoto, bigPhotoTitle };
