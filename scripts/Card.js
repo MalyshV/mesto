@@ -23,7 +23,7 @@ class Card {
   }
 
   _setEventListeners() {
-    this._photo.addEventListener('click', () => this._handleOpenPreview());
+    this._photo.addEventListener('click', () => this._handleOpenPhotoClick());
     this._cardRemoveButton.addEventListener('click', (event) => this._handleRemoveClick(event));
     this._cardLikeButton.addEventListener('click', (event) => this._handleLikeClick(event));
   }
@@ -36,7 +36,7 @@ class Card {
     this._newCard.closest('.element').remove();
   }
 
-  _handleOpenPreview() {
+  _handleOpenPhotoClick() {
     openPopup(popupPhoto);
     bigPhoto.src = this._link;
     bigPhotoTitle.textContent = this._title;

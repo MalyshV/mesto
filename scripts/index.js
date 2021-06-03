@@ -9,7 +9,6 @@ const formElement = document.querySelector('[name="profile-form"]');
 const popupCardOpenButton = document.querySelector('.profile__add-button');
 const popupCardCloseButton = document.querySelector('#button');
 const popupPhotoCloseButton = document.querySelector('#button_photo');
-const cardTemplate = document.querySelector('#card-template');
 const placeInput = document.querySelector('[name="name"]');
 const imageInput = document.querySelector('[name="link"]');
 const container = document.querySelector('.elements');
@@ -19,8 +18,6 @@ const jobInput = document.querySelector('[name="user-job"]');
 const profileName = document.querySelector('.profile__user-name');
 const profileJob = document.querySelector('.profile__user-job');
 const popupCardForm = document.querySelector('[name="card-form"]');
-const buttonElement = formElement.querySelector('.input-container__button');
-const inputList = Array.from(formElement.querySelectorAll('.input-container__item'));
 const bigPhoto = document.querySelector('.popup__image');
 const bigPhotoTitle = document.querySelector('.popup__text');
 const overlays = Array.from(document.querySelectorAll('.popup'));
@@ -97,13 +94,7 @@ const handleCardFormSubmit = event => {
   closeCardPopup();
 };
 
-// PopupPhoto functions
-const openPhotoPopup = event => {
-  openPopup(popupPhoto);
-  bigPhoto.src = event.target.src;
-  bigPhotoTitle.textContent = event.target.alt;
-};
-
+// PopupPhoto function
 const closePhotoPopup = () => {
   closePopup(popupPhoto);
 };
