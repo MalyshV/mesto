@@ -1,4 +1,6 @@
 import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
+import { initialCards } from './initial-сards.js';
 
 const popupProfileOpenButton = document.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('#popup');
@@ -99,13 +101,25 @@ const closePhotoPopup = () => {
   closePopup(popupPhoto);
 };
 
-enableValidation({
+const profileFormValidator = new FormValidator({
   formSelector: '.form',
   inputSelector: '.input-container__item',
   submitButtonSelector: '.input-container__button',
   inputErrorClass: 'input-container__item_type_error',
   errorActiveClass: 'input-container__input-error_active',
-});
+}, formElement);
+
+profileFormValidator.enableValidation();
+
+const cardFormValidator = new FormValidator({
+  formSelector: '.form',
+  inputSelector: '.input-container__item',
+  submitButtonSelector: '.input-container__button',
+  inputErrorClass: 'input-container__item_type_error',
+  errorActiveClass: 'input-container__input-error_active',
+}, popupCardForm);
+
+cardFormValidator.enableValidation();
 
 popupProfileOpenButton.addEventListener('click', openProfilePopup);
 popupProfileCloseButton.addEventListener('click', closeProfilePopup);
