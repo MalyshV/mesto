@@ -23,6 +23,7 @@ const popupCardForm = document.querySelector('[name="card-form"]');
 const bigPhoto = document.querySelector('.popup__image');
 const bigPhotoTitle = document.querySelector('.popup__text');
 const overlays = Array.from(document.querySelectorAll('.popup'));
+const popupActive = document.querySelector('.popup_is-opened');
 
 
 const createCard = (title, link) => {
@@ -43,10 +44,17 @@ const closePopup = (popup) => {
 
 const closePopupOnEscape = event => {
   if (event.key === 'Escape') {
-    const popupActive = document.querySelector('.popup_is-opened');
     closePopup(popupActive);
   }
 };
+
+const checkForm = (popup) => {
+  const input = popup.querySelector('.input-container__item');
+  const error = popup.querySelector(`#${input.id}-error`);
+
+  error.textContent = '';
+  input.classList.remove('input-container__item_type_error');
+}
 
 // popupProfile functions
 const openProfilePopup = () => {
@@ -54,6 +62,7 @@ const openProfilePopup = () => {
   jobInput.value = profileJob.textContent;
 
   openPopup(popupProfile);
+  checkForm(popupProfile);
 };
 
 const closeProfilePopup = () => {
@@ -75,9 +84,9 @@ const openCardPopup = () => {
   popupCardForm.reset();
 
   const button = popupCardForm.querySelector('.input-container__button');
-  const inputs = Array.from(popupCardForm.querySelectorAll('.input-container__item'));
+  button.disabled = true;
 
-  toggleButtonState(button, inputs);
+  checkForm(popupCardForm);
 };
 
 const closeCardPopup = () => {

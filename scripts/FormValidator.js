@@ -50,6 +50,8 @@ class FormValidator {
     errorElement.classList.add(this._config.errorActiveClass);
   };
 
+
+
   enableValidation() {
     this._formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
