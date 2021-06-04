@@ -88,9 +88,8 @@ const handleCardFormSubmit = event => {
 
   const title = placeInput.value;
   const link = imageInput.value;
-  const alt =  placeInput.value;
 
-  cardContainer.prepend(createCard(title, link, alt));
+  cardContainer.prepend(createCard(title, link));
 
   popupCardForm.reset();
   closeCardPopup();
@@ -101,24 +100,18 @@ const closePhotoPopup = () => {
   closePopup(popupPhoto);
 };
 
-const profileFormValidator = new FormValidator({
+const config = {
   formSelector: '.form',
   inputSelector: '.input-container__item',
   submitButtonSelector: '.input-container__button',
   inputErrorClass: 'input-container__item_type_error',
   errorActiveClass: 'input-container__input-error_active',
-}, formElement);
+};
 
+const profileFormValidator = new FormValidator(config, formElement);
 profileFormValidator.enableValidation();
 
-const cardFormValidator = new FormValidator({
-  formSelector: '.form',
-  inputSelector: '.input-container__item',
-  submitButtonSelector: '.input-container__button',
-  inputErrorClass: 'input-container__item_type_error',
-  errorActiveClass: 'input-container__input-error_active',
-}, popupCardForm);
-
+const cardFormValidator = new FormValidator(config, popupCardForm);
 cardFormValidator.enableValidation();
 
 popupProfileOpenButton.addEventListener('click', openProfilePopup);
@@ -132,7 +125,7 @@ formElement.addEventListener('submit', handleProfileFormSubmit);
 // Close on overlay
 overlays.forEach((popup) => {
   popup.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
+    if (evt.target.classList.contains('popup')) {
       closePopup(popup);
     }
   })
@@ -140,7 +133,7 @@ overlays.forEach((popup) => {
 
 // Create initial cards
 initialCards.forEach(function (currentItem) {
-  cardContainer.append(createCard(currentItem.name, currentItem.link, currentItem.alt));
+  cardContainer.append(createCard(currentItem.name, currentItem.link));
 });
 
 export { openPopup, popupPhoto, bigPhoto, bigPhotoTitle };
