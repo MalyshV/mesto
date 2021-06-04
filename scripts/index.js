@@ -47,7 +47,7 @@ const closePopupOnEscape = event => {
   }
 };
 
-const checkForm = (popup) => {
+const cleanFormError = (popup) => {
   const input = popup.querySelector('.input-container__item');
   const error = popup.querySelector(`#${input.id}-error`);
 
@@ -61,7 +61,7 @@ const openProfilePopup = () => {
   jobInput.value = profileJob.textContent;
 
   openPopup(popupProfile);
-  checkForm(popupProfile);
+  cleanFormError(popupProfile);
 };
 
 const closeProfilePopup = () => {
@@ -85,7 +85,7 @@ const openCardPopup = () => {
   const button = popupCardForm.querySelector('.input-container__button');
   button.disabled = true;
 
-  checkForm(popupCardForm);
+  cleanFormError(popupCardForm);
 };
 
 const closeCardPopup = () => {
