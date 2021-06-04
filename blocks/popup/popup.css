@@ -10,6 +10,6 @@
   right: 0;
   z-index: 1;
   visibility: hidden;
-  opacity: 0;
-  transition: visibility 0s, opacity .8s ease-in-out 0s;
+	opacity: 0;
+  transition: visibility .5s, opacity .5s linear;
 }

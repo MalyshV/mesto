@@ -24,6 +24,7 @@ const bigPhoto = document.querySelector('.popup__image');
 const bigPhotoTitle = document.querySelector('.popup__text');
 const overlays = Array.from(document.querySelectorAll('.popup'));
 
+
 const createCard = (title, link) => {
   const card = new Card(title, link, '#card-template');
 
