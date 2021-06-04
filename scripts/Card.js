@@ -5,14 +5,15 @@ class Card {
     this._title = title;
     this._link = link;
     this._templateSelector = templateSelector;
+  }
 
-    this._createCard();
-    this._setEventListeners();
+  _getTemplate() {
+    const cardTemplate = document.querySelector(this._templateSelector);
+    this._newCard = cardTemplate.content.querySelector('.element').cloneNode(true);
   }
 
   _createCard() {
-    const cardTemplate = document.querySelector(this._templateSelector);
-    this._newCard = cardTemplate.content.querySelector('.element').cloneNode(true);
+    this._getTemplate();
 
     this._cardRemoveButton = this._newCard.querySelector('.element__delete-button');
     this._cardLikeButton = this._newCard.querySelector('.element__like-button');
@@ -20,6 +21,7 @@ class Card {
 
     this._newCard.querySelector('.element__title').textContent = this._title;
     this._photo.src = this._link;
+    this._photo.alt = this._title;
   }
 
   _setEventListeners() {
@@ -40,9 +42,13 @@ class Card {
     openPopup(popupPhoto);
     bigPhoto.src = this._link;
     bigPhotoTitle.textContent = this._title;
+    this._title = this._alt;
   }
 
   render() {
+    this._createCard();
+    this._setEventListeners();
+
     return this._newCard;
   }
 }
