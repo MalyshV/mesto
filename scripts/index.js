@@ -82,10 +82,8 @@ const openCardPopup = () => {
   openPopup(popupCard);
   popupCardForm.reset();
 
-  const button = popupCardForm.querySelector('.input-container__button');
-  button.disabled = true;
-
   cleanFormError(popupCardForm);
+  cardFormValidator.toggleButtonState();
 };
 
 const closeCardPopup = () => {
