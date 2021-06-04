@@ -23,6 +23,7 @@ const popupCardForm = document.querySelector('[name="card-form"]');
 const bigPhoto = document.querySelector('.popup__image');
 const bigPhotoTitle = document.querySelector('.popup__text');
 const overlays = Array.from(document.querySelectorAll('.popup'));
+const inputElement = popup.querySelector('.input-container__item');
 
 const createCard = (title, link) => {
   const card = new Card(title, link, '#card-template');
@@ -47,21 +48,13 @@ const closePopupOnEscape = event => {
   }
 };
 
-const cleanFormError = (popup) => {
-  const input = popup.querySelector('.input-container__item');
-  const error = popup.querySelector(`#${input.id}-error`);
-
-  error.textContent = '';
-  input.classList.remove('input-container__item_type_error');
-}
-
 // popupProfile functions
 const openProfilePopup = () => {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 
   openPopup(popupProfile);
-  cleanFormError(popupProfile);
+  profileFormValidator.hideInputError(inputElement);
 };
 
 const closeProfilePopup = () => {
@@ -82,8 +75,10 @@ const openCardPopup = () => {
   openPopup(popupCard);
   popupCardForm.reset();
 
-  cleanFormError(popupCardForm);
+  const input = popupCard.querySelector('.input-container__item');
+
   cardFormValidator.toggleButtonState();
+  cardFormValidator.hideInputError(input);
 };
 
 const closeCardPopup = () => {

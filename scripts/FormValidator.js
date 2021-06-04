@@ -22,7 +22,7 @@ class FormValidator {
 
   _checkInputValidity(inputElement) {
     if (inputElement.validity.valid) {
-      this._hideInputError(inputElement);
+      this.hideInputError(inputElement);
     } else {
       this._showInputError(inputElement);
     }
@@ -36,7 +36,7 @@ class FormValidator {
     }
   };
 
-  _hideInputError(inputElement) {
+  hideInputError = (inputElement) => {
     const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(this._config.inputErrorClass);
     errorElement.classList.remove(this._config.errorActiveClass);
