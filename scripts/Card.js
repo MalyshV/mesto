@@ -42,7 +42,7 @@ class Card {
     openPopup(popupPhoto);
     bigPhoto.src = this._link;
     bigPhotoTitle.textContent = this._title;
-    this._title = this._alt;
+    bigPhoto.alt = this._title
   }
 
   render() {

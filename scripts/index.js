@@ -25,7 +25,6 @@ const bigPhotoTitle = document.querySelector('.popup__text');
 const overlays = Array.from(document.querySelectorAll('.popup'));
 const inputElement = popup.querySelector('.input-container__item');
 
-
 const createCard = (title, link) => {
   const card = new Card(title, link, '#card-template');
 
@@ -34,12 +33,12 @@ const createCard = (title, link) => {
 
 const openPopup = (popup) => {
   popup.classList.add('popup_is-opened');
-  document.addEventListener('keydown', closePopupOnEscape);
+  document.addEventListener('keydown', (event) => closePopupOnEscape(event));
 };
 
 const closePopup = (popup) => {
   popup.classList.remove('popup_is-opened');
-  document.removeEventListener('keydown', closePopupOnEscape);
+  document.removeEventListener('keydown', (event) => closePopupOnEscape(event));
 };
 
 const closePopupOnEscape = event => {
@@ -58,17 +57,13 @@ const openProfilePopup = () => {
   profileFormValidator.hideInputError(inputElement);
 };
 
-const closeProfilePopup = () => {
-  closePopup(popupProfile);
-};
-
 const handleProfileFormSubmit = event => {
   event.preventDefault();
 
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
 
-  closeProfilePopup();
+  closePopup(popupProfile);
 };
 
 // popupCard functions
@@ -82,10 +77,6 @@ const openCardPopup = () => {
   cardFormValidator.hideInputError(input);
 };
 
-const closeCardPopup = () => {
-  closePopup(popupCard);
-};
-
 const handleCardFormSubmit = event => {
   event.preventDefault();
 
@@ -95,12 +86,7 @@ const handleCardFormSubmit = event => {
   cardContainer.prepend(createCard(title, link));
 
   popupCardForm.reset();
-  closeCardPopup();
-};
-
-// PopupPhoto function
-const closePhotoPopup = () => {
-  closePopup(popupPhoto);
+  closePopup(popupCard);
 };
 
 const config = {
@@ -117,18 +103,18 @@ profileFormValidator.enableValidation();
 const cardFormValidator = new FormValidator(config, popupCardForm);
 cardFormValidator.enableValidation();
 
-popupProfileOpenButton.addEventListener('click', openProfilePopup);
-popupProfileCloseButton.addEventListener('click', closeProfilePopup);
-popupCardOpenButton.addEventListener('click', openCardPopup);
-popupCardCloseButton.addEventListener('click', closeCardPopup);
-popupPhotoCloseButton.addEventListener('click', closePhotoPopup);
-popupCard.addEventListener('submit', handleCardFormSubmit);
-formElement.addEventListener('submit', handleProfileFormSubmit);
+popupCardOpenButton.addEventListener('click', () => openCardPopup());
+popupProfileOpenButton.addEventListener('click', () => openProfilePopup());
+formElement.addEventListener('submit', (event) => handleProfileFormSubmit(event));
+popupCard.addEventListener('submit', (event) => handleCardFormSubmit(event));
+popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
+popupCardCloseButton.addEventListener('click', () => closePopup(popupCard));
+popupPhotoCloseButton.addEventListener('click', () => closePopup(popupPhoto));
 
 // Close on overlay
 overlays.forEach((popup) => {
-  popup.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('popup')) {
+  popup.addEventListener('click', (event) => {
+    if (event.target.classList.contains('popup')) {
       closePopup(popup);
     }
   })
