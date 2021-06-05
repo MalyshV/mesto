@@ -23,7 +23,6 @@ const popupCardForm = document.querySelector('[name="card-form"]');
 const bigPhoto = document.querySelector('.popup__image');
 const bigPhotoTitle = document.querySelector('.popup__text');
 const overlays = Array.from(document.querySelectorAll('.popup'));
-const inputElement = popup.querySelector('.input-container__item');
 
 const createCard = (title, link) => {
   const card = new Card(title, link, '#card-template');
@@ -54,7 +53,11 @@ const openProfilePopup = () => {
   jobInput.value = profileJob.textContent;
 
   openPopup(popupProfile);
-  profileFormValidator.hideInputError(inputElement);
+
+  const inputList = Array.from(popupProfile.querySelectorAll('.input-container__item'));
+  inputList.forEach((input) => {
+    profileFormValidator.hideInputError(input);
+  });
 };
 
 const handleProfileFormSubmit = event => {
@@ -71,10 +74,12 @@ const openCardPopup = () => {
   openPopup(popupCard);
   popupCardForm.reset();
 
-  const input = popupCard.querySelector('.input-container__item');
-
   cardFormValidator.toggleButtonState();
-  cardFormValidator.hideInputError(input);
+
+  const inputs = Array.from(popupCard.querySelectorAll('.input-container__item'));
+  inputs.forEach((input) => {
+    cardFormValidator.hideInputError(input);
+  });
 };
 
 const handleCardFormSubmit = event => {
