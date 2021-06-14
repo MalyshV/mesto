@@ -1,5 +1,5 @@
 class FormValidator {
-  constructor(config, formElement){
+  constructor(config, formElement) {
     this._config = config;
     this._formElement = formElement;
     this._inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));

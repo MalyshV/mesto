@@ -1,8 +1,9 @@
 import { nameInput, profileName, jobInput, profileJob, popupProfile, popupCard, popupCardForm, cardContainer, placeInput, imageInput, popupCardOpenButton, popupProfileOpenButton, formElement, popupProfileCloseButton, popupCardCloseButton, popupPhotoCloseButton } from '../utils/constants.js';
-import { Card } from '../scripts/Card.js';
-import { FormValidator } from '../scripts/FormValidator.js';
+import { Card } from '../components/Card.js';
+import { FormValidator } from '../components/FormValidator.js';
 import { initialCards } from '../utils/initial-сards.js';
 
+// константы ниже потом убрать
 const overlays = Array.from(document.querySelectorAll('.popup'));
 const popupPhoto = document.querySelector('#popup_photo');
 
@@ -12,16 +13,20 @@ const createCard = (title, link) => {
   return card.render();
 };
 
+
+// удалить, перенесла в class Popup
 const openPopup = (popup) => {
   popup.classList.add('popup_is-opened');
   document.addEventListener('keydown', (event) => closePopupOnEscape(event));
 };
 
+// удалить, перенесла в class Popup
 const closePopup = (popup) => {
   popup.classList.remove('popup_is-opened');
   document.removeEventListener('keydown', (event) => closePopupOnEscape(event));
 };
 
+// удалить, перенесла в class Popup
 const closePopupOnEscape = event => {
   if (event.key === 'Escape') {
     const popupActive = document.querySelector('.popup_is-opened');
@@ -94,6 +99,7 @@ popupCardOpenButton.addEventListener('click', () => openCardPopup());
 popupProfileOpenButton.addEventListener('click', () => openProfilePopup());
 formElement.addEventListener('submit', (event) => handleProfileFormSubmit(event));
 popupCard.addEventListener('submit', (event) => handleCardFormSubmit(event));
+// удалить, перенесла в class Popup
 popupProfileCloseButton.addEventListener('click', () => closePopup(popupProfile));
 popupCardCloseButton.addEventListener('click', () => closePopup(popupCard));
 popupPhotoCloseButton.addEventListener('click', () => closePopup(popupPhoto));

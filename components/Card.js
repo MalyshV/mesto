@@ -2,9 +2,10 @@ import { bigPhoto, bigPhotoTitle } from '../utils/constants.js';
 import { openPopup, popupPhoto } from '../pages/index.js';
 
 class Card {
-  constructor (title, link, templateSelector){
-    this._title = title;
-    this._link = link;
+  constructor ({data, handleCardClick}, templateSelector) {
+    this._title = data.title;
+    this._link = data.link;
+    this._handleCardClick = handleCardClick;
     this._templateSelector = templateSelector;
   }
 
