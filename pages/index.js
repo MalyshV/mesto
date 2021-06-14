@@ -1,28 +1,10 @@
-import { Card } from './Card.js';
-import { FormValidator } from './FormValidator.js';
-import { initialCards } from './initial-сards.js';
+import { nameInput, profileName, jobInput, profileJob, popupProfile, popupCard, popupCardForm, cardContainer, placeInput, imageInput, popupCardOpenButton, popupProfileOpenButton, formElement, popupProfileCloseButton, popupCardCloseButton, popupPhotoCloseButton } from '../utils/constants.js';
+import { Card } from '../scripts/Card.js';
+import { FormValidator } from '../scripts/FormValidator.js';
+import { initialCards } from '../utils/initial-сards.js';
 
-const popupProfileOpenButton = document.querySelector('.profile__edit-button');
-const popupProfile = document.querySelector('#popup');
-const popupCard = document.querySelector('#popup_card');
-const popupPhoto = document.querySelector('#popup_photo');
-const popupProfileCloseButton = document.querySelector('.popup__close');
-const formElement = document.querySelector('[name="profile-form"]');
-const popupCardOpenButton = document.querySelector('.profile__add-button');
-const popupCardCloseButton = document.querySelector('#button');
-const popupPhotoCloseButton = document.querySelector('#button_photo');
-const placeInput = document.querySelector('[name="name"]');
-const imageInput = document.querySelector('[name="link"]');
-const container = document.querySelector('.elements');
-const cardContainer = container.querySelector('.elements__list');
-const nameInput = document.querySelector('[name="user-name"]');
-const jobInput = document.querySelector('[name="user-job"]');
-const profileName = document.querySelector('.profile__user-name');
-const profileJob = document.querySelector('.profile__user-job');
-const popupCardForm = document.querySelector('[name="card-form"]');
-const bigPhoto = document.querySelector('.popup__image');
-const bigPhotoTitle = document.querySelector('.popup__text');
 const overlays = Array.from(document.querySelectorAll('.popup'));
+const popupPhoto = document.querySelector('#popup_photo');
 
 const createCard = (title, link) => {
   const card = new Card(title, link, '#card-template');
@@ -130,4 +112,4 @@ initialCards.forEach(function (currentItem) {
   cardContainer.append(createCard(currentItem.name, currentItem.link));
 });
 
-export { openPopup, popupPhoto, bigPhoto, bigPhotoTitle };
+export { openPopup, popupPhoto };

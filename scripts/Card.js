@@ -1,4 +1,5 @@
-import { openPopup, popupPhoto, bigPhoto, bigPhotoTitle } from './index.js';
+import { bigPhoto, bigPhotoTitle } from '../utils/constants.js';
+import { openPopup, popupPhoto } from '../pages/index.js';
 
 class Card {
   constructor (title, link, templateSelector){
