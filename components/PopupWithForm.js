@@ -1,9 +1,20 @@
 export class PopupWithForm extends Popup {
-  constructor() {
-    super();
+  constructor({popupSelector, handleFormSubmit}) {
+    super(popupSelector);
+    this._handleFormSubmit = handleFormSubmit;
+    this._form = this._popup.querySelector('.form');
+    this._inputList = this._form.querySelectorAll('.input-container__item');
   }
 
-  _getInputValues() {
+  // ниже код для индекса
+  /* const popupAdd = new PopupWithForm({
+    popupSelector: popupPlace,
+    handleFormSubmit: () => {
+      // предотвращаем стандартное поведение формы при submit и описываем логику передачи данных в зависимости от формы
+    }
+  })*/
+
+  _getInputValues = () => {
 
   }
 
