@@ -1,4 +1,4 @@
-export default class UserInfo {
+class UserInfo {
   constructor(name, about) {
     this._ = name;
     this._ = about;
@@ -13,3 +13,5 @@ export default class UserInfo {
 
   };
 }
+
+export { UserInfo };

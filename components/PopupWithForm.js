@@ -1,9 +1,13 @@
-export class PopupWithForm extends Popup {
-  constructor({popupSelector, handleFormSubmit}) {
+import { Popup } from './Popup.js';
+
+class PopupWithForm extends Popup {
+  constructor(popupSelector, callBackSubmit) {
     super(popupSelector);
-    this._handleFormSubmit = handleFormSubmit;
-    this._form = this._popup.querySelector('.form');
-    this._inputList = this._form.querySelectorAll('.input-container__item');
+    this._callBackSubmit = callBackSubmit;
+    this._formItem = this.popupItem.querySelector('.form');
+    this._inputList = this._formItem.querySelectorAll('.input-container__item');
+    this._placeInput = this._formItem.querySelector('[name="name"]');
+    this._imageInput = this._formItem.querySelector('[name="link"]');
   }
 
   // ниже код для индекса
@@ -15,16 +19,29 @@ export class PopupWithForm extends Popup {
   })*/
 
   _getInputValues = () => {
+    const inputList = Array.from(this._formItem.querySelectorAll('.input-container__item'));
+    const object = {};
 
+    inputList.forEach(item => {
+      object[item.name] = item.value;
+    });
+
+    return object;
   }
 
   setEventListeners() {
+    super.setEventListeners();
+    this._formItem.addEventListener('submit', (event) => {
+      event.preventDefault();
 
+      const data = this._getInputValues();
+      this._callBackSubmit(data);
+    })
   }
 
-  close() {
+  /*close() {
     super.close();
-  }
+  }*/
 }
 
-// Для каждого попапа создавайте свой экземпляр класса PopupWithForm
+export { PopupWithForm };

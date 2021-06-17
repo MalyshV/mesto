@@ -1,18 +1,21 @@
-export default class Section {
-  constructor({items, renderer}, containerSelector) {
-    this._renderedItems = items;
+class Section {
+  constructor({ items, renderer }, containerSelector) {
+    this._items = items;
     this._renderer = renderer;
-    this._containerSelector = document.querySelector(containerSelector);
-    // this._targetPlace = document.querySelector(targetPlaceSelector); - вместо пред.строки
+    this._element = document.querySelector(containerSelector);
   }
 
-  // + задавать функцию как обработчик событий внутри класса
-
-  // отрисовка всех элементов с помощью функции renderer;
-
-  addItem() {
-
+  addItem(htmlElement) {
+    this._element.prepend(htmlElement);
   };
 
-  // получает разметку через функцию-колбэк и вставляет её в контейнер
+  render() {
+    this._items.forEach(cardData => {
+      const htmlElement = this._renderer(cardData)
+      this.addItem(htmlElement);
+    });
+  }
 }
+
+export { Section };
+
