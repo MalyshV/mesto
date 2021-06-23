@@ -5,20 +5,9 @@ class PopupWithForm extends Popup {
     super(popupSelector);
     this._callBackSubmit = callBackSubmit;
     this._formItem = this.popupItem.querySelector('.form');
-    this._inputList = this._formItem.querySelectorAll('.input-container__item');
-    this._placeInput = this._formItem.querySelector('[name="name"]');
-    this._imageInput = this._formItem.querySelector('[name="link"]');
   }
 
-  // ниже код для индекса
-  /* const popupAdd = new PopupWithForm({
-    popupSelector: popupPlace,
-    handleFormSubmit: () => {
-      // предотвращаем стандартное поведение формы при submit и описываем логику передачи данных в зависимости от формы
-    }
-  })*/
-
-  _getInputValues = () => {
+  _getInputValues() {
     const inputList = Array.from(this._formItem.querySelectorAll('.input-container__item'));
     const object = {};
 
@@ -36,12 +25,13 @@ class PopupWithForm extends Popup {
 
       const data = this._getInputValues();
       this._callBackSubmit(data);
-    })
+    });
   }
 
-  /*close() {
+  close() {
     super.close();
-  }*/
+    this._formItem.reset();
+  }
 }
 
 export { PopupWithForm };

@@ -1,11 +1,12 @@
+import { popupWithImage } from '../pages/index.js';
 import { bigPhoto, bigPhotoTitle } from '../utils/constants.js';
-import { openPopup, popupPhoto } from '../pages/index.js';
 
 class Card {
-  constructor (cardData, templateSelector) {
+  constructor (cardData, templateSelector, handleCardClick) {
     this._title = cardData.name;
     this._link = cardData.link;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -26,7 +27,9 @@ class Card {
   }
 
   _setEventListeners() {
-    this._photo.addEventListener('click', () => this._handleOpenPhotoClick());
+    this._photo.addEventListener('click', (name, link) => {
+      this.handleCardClick(name, link);
+    });
     this._cardRemoveButton.addEventListener('click', (event) => this._handleRemoveClick(event));
     this._cardLikeButton.addEventListener('click', (event) => this._handleLikeClick(event));
   }
@@ -39,8 +42,9 @@ class Card {
     this._newCard.closest('.element').remove();
   }
 
-  _handleOpenPhotoClick() {
-    openPopup(popupPhoto);
+  handleCardClick(name, link) {
+    popupWithImage.open(name, link);
+
     bigPhoto.src = this._link;
     bigPhotoTitle.textContent = this._title;
     bigPhoto.alt = this._title

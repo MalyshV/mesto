@@ -1,33 +1,36 @@
 class Popup {
   constructor(popupSelector) {
     this.popupItem = document.querySelector(popupSelector);
+    this._closeButtonIcon = this.popupItem.querySelector('.popup__close');
   }
 
   open() {
     this.popupItem.classList.add('popup_is-opened');
-    //document.addEventListener('keydown', () => this._handleEscClose());
   }
 
   close() {
     this.popupItem.classList.remove('popup_is-opened');
-    //document.removeEventListener('keydown', () => this._handleEscClose());
+    document.removeEventListener('keydown', () => this._handleEscClose());
   }
 
-  _handleEscClose() {
-    // переписываем логику на class Popup:
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') {
-        this.close();
-        // или this.close();
-      }
-    })
+  _handleOverlayClose(event) {
+    if (event.target.classList.contains('popup')) {
+      this.close();
+    }
+  }
+
+  _handleEscClose(event) {
+    if (event.key === 'Escape') {
+      this.close();
+    };
   }
 
   setEventListeners() {
-    // переписываем логику на class Popup:
-    /*this._closeButton = this._popup.querySelector('.popup__close');
-
-    this._closeButton.addEventListener('click', Popup._close());*/
+    document.addEventListener('keydown', this._handleEscClose);
+    this.popupItem.addEventListener('click', this._handleOverlayClose);
+    this._closeButtonIcon.addEventListener('click', () => {
+      this.close();
+    });
   }
 }
 
