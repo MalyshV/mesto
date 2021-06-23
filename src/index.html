@@ -3,17 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Mesto</title>
 </head>
 <body class="page">
   <header class="header page__container">
-    <img class="header__logo" src="images/LogoVector.svg" alt="Логотип сервиса Mesto">
+    <img class="header__logo" src="<%=require('./images/LogoVector.svg')%>" alt="Логотип сервиса Mesto">
   </header>
   <main class="content page__container">
     <section class="profile">
       <div class="profile__avatar">
-        <img class="profile__image" alt="фото пользователя" src="images/image.jpg">
+        <img class="profile__image" alt="фото пользователя" src="<%=require('./images/image.jpg')%>">
         <div class="profile__info">
           <div class="profile__change">
             <h1 class="profile__user-name">Жак-Ив Кусто</h1>
@@ -69,7 +68,7 @@
     <div class="popup__content popup__content_theme_photo">
       <button class="popup__close page__buttons" id="button_photo" type="button"></button>
       <figure class="popup__figure">
-        <img class="popup__image" src="#" alt="Изображение указанного района">
+        <img class="popup__image" src="" alt="Изображение указанного района">
         <figcaption class="popup__text"></figcaption>
        </figure>
     </div>
@@ -77,7 +76,7 @@
 
   <template id="card-template">
     <li class="element">
-      <img class="element__image" src="#" alt="Изображение указанного района">
+      <img class="element__image" src="" alt="Изображение указанного района">
       <div class="element__description">
         <h2 class="element__title"></h2>
         <button class="element__like-button page__buttons" type="button"></button>
@@ -86,6 +85,5 @@
     </li>
   </template>
 
-  <script type="module" src="./pages/index.js" defer></script>
 </body>
 </html>
