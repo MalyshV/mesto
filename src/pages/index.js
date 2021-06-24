@@ -1,5 +1,5 @@
 import './index.css';
-import { formElement, popupCardForm, popupCardOpenButton, popupProfileOpenButton, nameInput, jobInput, config, inputs, inputList } from '../utils/constants.js';
+import { formElement, popupCardForm, popupCardOpenButton, popupProfileOpenButton, nameInput, jobInput, config, inputs, inputList, bigPhoto, bigPhotoTitle } from '../utils/constants.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { initialCards } from '../utils/initial-сards.js';
@@ -13,14 +13,14 @@ import { UserInfo } from '../components/UserInfo.js';
 const section = new Section({
   items: initialCards,
   renderer: (data) => {
-    const card = new Card(data, '#card-template');
+    const card = new Card(data, '#card-template', handleCardClick);
 
     return card.render();
   }
 }, '.elements__list');
 
 const popupAddCard = new PopupWithForm('#popup_card', (data) => {
-  const card = new Card(data, '#card-template');
+  const card = new Card(data, '#card-template', handleCardClick);
   section.addItem(card.render());
 
   popupAddCard.close();
@@ -43,6 +43,14 @@ const profileFormValidator = new FormValidator(config, formElement);
 
 
 // Functions:
+const handleCardClick = (name, link) => {
+  popupWithImage.open(name, link);
+
+  bigPhoto.src = link;
+  bigPhotoTitle.textContent = name;
+  bigPhoto.alt = name;
+};
+
 section.renderInitialCards();
 popupAddCard.setEventListeners();
 popupEditProfile.setEventListeners();
@@ -73,6 +81,3 @@ popupProfileOpenButton.addEventListener('click', () => {
     profileFormValidator.hideInputError(input);
   });
 });
-
-
-export { popupWithImage }; // удалить, когда поправлю класс Card - открытие картинки
