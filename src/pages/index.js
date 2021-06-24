@@ -1,5 +1,5 @@
 import './index.css';
-import { formElement, popupCardForm, popupCardOpenButton, popupProfileOpenButton, submitButton, nameInput, jobInput, config, popupCard, popupProfile } from '../utils/constants.js';
+import { formElement, popupCardForm, popupCardOpenButton, popupProfileOpenButton, nameInput, jobInput, config, inputs, inputList } from '../utils/constants.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { initialCards } from '../utils/initial-сards.js';
@@ -19,22 +19,22 @@ const section = new Section({
   }
 }, '.elements__list');
 
-const cardPopup = new PopupWithForm('#popup_card', (data) => {
+const popupAddCard = new PopupWithForm('#popup_card', (data) => {
   const card = new Card(data, '#card-template');
-  section.addItem(card.render(), '#card-template');
+  section.addItem(card.render());
 
-  cardPopup.close();
+  popupAddCard.close();
 });
 
-const profilePopup = new PopupWithForm('#popup', () => {
+const popupEditProfile = new PopupWithForm('#popup', () => {
   userInfo.setUserInfo({name: nameInput.value, job: jobInput.value});
 
-  profilePopup.close();
+  popupEditProfile.close();
 });
 
 const userInfo = new UserInfo({
-  name: '.profile__user-name',
-  job:'.profile__user-job',
+  nameSelector: '.profile__user-name',
+  jobSelector:'.profile__user-job',
 })
 
 const popupWithImage = new PopupWithImage('#popup_photo');
@@ -44,8 +44,8 @@ const profileFormValidator = new FormValidator(config, formElement);
 
 // Functions:
 section.renderInitialCards();
-cardPopup.setEventListeners();
-profilePopup.setEventListeners();
+popupAddCard.setEventListeners();
+popupEditProfile.setEventListeners();
 popupWithImage.setEventListeners();
 cardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
@@ -53,30 +53,26 @@ profileFormValidator.enableValidation();
 
 // Listeners:
 popupCardOpenButton.addEventListener('click', () => {
-  cardPopup.open();
+  popupAddCard.open();
 
   cardFormValidator.toggleButtonState();
 
-  const inputs = Array.from(popupCard.querySelectorAll('.input-container__item'));
   inputs.forEach((input) => {
     cardFormValidator.hideInputError(input);
   });
 });
 
 popupProfileOpenButton.addEventListener('click', () => {
-  profilePopup.open();
+  popupEditProfile.open();
 
   const data = userInfo.getUserInfo();
   nameInput.value = data.name;
   jobInput.value = data.job;
 
-  submitButton.disabled = true;
-
-  const inputList = Array.from(popupProfile.querySelectorAll('.input-container__item'));
   inputList.forEach((input) => {
     profileFormValidator.hideInputError(input);
   });
 });
 
 
-export { popupWithImage };
+export { popupWithImage }; // удалить, когда поправлю класс Card - открытие картинки

@@ -7,7 +7,7 @@ class Section {
   }
 
   addItem(domElement) {
-    this._element.append(domElement);
+    this._element.prepend(domElement);
   };
 
   renderInitialCards() {
