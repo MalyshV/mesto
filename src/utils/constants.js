@@ -8,10 +8,6 @@ export const profileName = document.querySelector('.profile__user-name');
 export const profileJob = document.querySelector('.profile__user-job');
 export const bigPhoto = document.querySelector('.popup__image');
 export const bigPhotoTitle = document.querySelector('.popup__text');
-const popupCard = document.querySelector('#popup_card');
-const popupProfile = document.querySelector('#popup');
-export const inputs = Array.from(popupCard.querySelectorAll('.input-container__item'));
-export const inputList = Array.from(popupProfile.querySelectorAll('.input-container__item'));
 
 export const config = {
   formSelector: '.form',
