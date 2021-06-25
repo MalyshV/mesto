@@ -20,6 +20,7 @@ const section = new Section({
 }, config.containerSelector);
 
 const popupAddCard = new PopupWithForm(config.popupCardSelector, (data) => {
+  createCard(data);
   const card = new Card(data, config.templateSelector, handleCardClick);
   section.addItem(card.render());
 
