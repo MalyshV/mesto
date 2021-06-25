@@ -20,4 +20,8 @@ export const config = {
   inputErrorClass: 'input-container__item_type_error',
   errorActiveClass: 'input-container__input-error_active',
   containerSelector: '.elements__list',
+  templateSelector: '#card-template',
+  popupCardSelector: '#popup_card',
+  popupProfileSelector: '#popup',
+  popupPhotoSelector: '#popup_photo',
 };

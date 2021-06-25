@@ -1,5 +1,5 @@
 import './index.css';
-import { formElement, popupCardForm, popupCardOpenButton, popupProfileOpenButton, nameInput, jobInput, config, inputs, inputList, bigPhoto, bigPhotoTitle } from '../utils/constants.js';
+import { formElement, popupCardForm, popupCardOpenButton, popupProfileOpenButton, nameInput, jobInput, config, inputs, inputList, bigPhoto, bigPhotoTitle, profileName } from '../utils/constants.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { initialCards } from '../utils/initial-сards.js';
@@ -13,20 +13,20 @@ import { UserInfo } from '../components/UserInfo.js';
 const section = new Section({
   items: initialCards,
   renderer: (data) => {
-    const card = new Card(data, '#card-template', handleCardClick);
+    const card = new Card(data, config.templateSelector, handleCardClick);
 
     return card.render();
   }
-}, '.elements__list');
+}, config.containerSelector);
 
-const popupAddCard = new PopupWithForm('#popup_card', (data) => {
-  const card = new Card(data, '#card-template', handleCardClick);
+const popupAddCard = new PopupWithForm(config.popupCardSelector, (data) => {
+  const card = new Card(data, config.templateSelector, handleCardClick);
   section.addItem(card.render());
 
   popupAddCard.close();
 });
 
-const popupEditProfile = new PopupWithForm('#popup', () => {
+const popupEditProfile = new PopupWithForm(config.popupProfileSelector, () => {
   userInfo.setUserInfo({name: nameInput.value, job: jobInput.value});
 
   popupEditProfile.close();
@@ -37,7 +37,7 @@ const userInfo = new UserInfo({
   jobSelector:'.profile__user-job',
 })
 
-const popupWithImage = new PopupWithImage('#popup_photo');
+const popupWithImage = new PopupWithImage(config.popupPhotoSelector);
 const cardFormValidator = new FormValidator(config, popupCardForm);
 const profileFormValidator = new FormValidator(config, formElement);
 
