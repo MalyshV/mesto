@@ -64,10 +64,7 @@ popupCardOpenButton.addEventListener('click', () => {
   popupAddCard.open();
 
   cardFormValidator.toggleButtonState();
-
-  inputs.forEach((input) => {
-    cardFormValidator.hideInputError(input);
-  });
+  cardFormValidator.removeFormErrors();
 });
 
 popupProfileOpenButton.addEventListener('click', () => {
@@ -77,7 +74,5 @@ popupProfileOpenButton.addEventListener('click', () => {
   nameInput.value = data.name;
   jobInput.value = data.job;
 
-  inputList.forEach((input) => {
-    profileFormValidator.hideInputError(input);
-  });
+  profileFormValidator.removeFormErrors();
 });
