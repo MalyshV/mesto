@@ -13,16 +13,15 @@ import { UserInfo } from '../components/UserInfo.js';
 const section = new Section({
   items: initialCards,
   renderer: (data) => {
-    const card = new Card(data, config.templateSelector, handleCardClick);
+    createCard(data);
 
-    return card.render();
+    return createCard(data).render();
   }
 }, config.containerSelector);
 
 const popupAddCard = new PopupWithForm(config.popupCardSelector, (data) => {
   createCard(data);
-  const card = new Card(data, config.templateSelector, handleCardClick);
-  section.addItem(card.render());
+  section.addItem(createCard(data).render());
 
   popupAddCard.close();
 });
@@ -44,6 +43,13 @@ const profileFormValidator = new FormValidator(config, formElement);
 
 
 // Functions:
+const createCard = (data) => {
+  const card = new Card(data, config.templateSelector, handleCardClick);
+  console.log(card);
+
+  return card;
+};
+
 const handleCardClick = (name, link) => {
   popupWithImage.open(name, link);
 
