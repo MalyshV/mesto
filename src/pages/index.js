@@ -1,5 +1,5 @@
 import './index.css';
-import { formElement, popupCardForm, popupCardOpenButton, popupProfileOpenButton, nameInput, jobInput, config, bigPhoto, bigPhotoTitle } from '../utils/constants.js';
+import { formElement, popupCardForm, popupCardOpenButton, popupProfileOpenButton, nameInput, jobInput, config } from '../utils/constants.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { initialCards } from '../utils/initial-сards.js';
@@ -45,17 +45,12 @@ const profileFormValidator = new FormValidator(config, formElement);
 // Functions:
 const createCard = (data) => {
   const card = new Card(data, config.templateSelector, handleCardClick);
-  console.log(card);
 
   return card;
 };
 
-const handleCardClick = (name, link) => {
-  popupWithImage.open(name, link);
-
-  bigPhoto.src = link;
-  bigPhotoTitle.textContent = name;
-  bigPhoto.alt = name;
+const handleCardClick = (title, link) => {
+  popupWithImage.open(title, link);
 };
 
 section.renderInitialCards();

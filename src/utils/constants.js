@@ -6,8 +6,6 @@ export const nameInput = document.querySelector('[name="user-name"]');
 export const jobInput = document.querySelector('[name="user-job"]');
 export const profileName = document.querySelector('.profile__user-name');
 export const profileJob = document.querySelector('.profile__user-job');
-export const bigPhoto = document.querySelector('.popup__image');
-export const bigPhotoTitle = document.querySelector('.popup__text');
 
 export const config = {
   formSelector: '.form',
