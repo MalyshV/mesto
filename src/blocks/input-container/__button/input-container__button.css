@@ -1,6 +1,7 @@
 .input-container__button {
   background: #000000;
   color: #FFFFFF;
+  border-radius: 2px;
   font-size: 18px;
   line-height: 22px;
   margin-top: 48px;

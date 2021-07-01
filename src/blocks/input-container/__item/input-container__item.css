@@ -17,6 +17,8 @@
   padding: 0;
 }
 
+
+
 @media (max-width: 425px) {
   .input-container__item {
     font-size: 14px;

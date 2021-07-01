@@ -18,6 +18,13 @@ class PopupWithForm extends Popup {
     return inputValues;
   }
 
+  _changeAvatar() {
+    const avatarLink = this._formItem.querySelector('.input-container__item');
+    const userPhoto = document.querySelector('.profile__image');
+
+    userPhoto.src =  avatarLink.value; // вставляет, но не то
+  }
+
   setEventListeners() {
     super.setEventListeners();
     this._formItem.addEventListener('submit', (event) => {
@@ -25,6 +32,7 @@ class PopupWithForm extends Popup {
 
       const data = this._getInputValues();
       this._callBackSubmit(data);
+      this._changeAvatar();
     });
   }
 

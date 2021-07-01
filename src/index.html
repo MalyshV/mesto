@@ -12,7 +12,9 @@
   <main class="content page__container">
     <section class="profile">
       <div class="profile__avatar">
+        <!--<div class="profile__image"></div>-->
         <img class="profile__image" alt="фото пользователя" src="<%=require('./images/image.jpg')%>">
+        <div class="profile__icon"></div>
         <div class="profile__info">
           <div class="profile__change">
             <h1 class="profile__user-name">Жак-Ив Кусто</h1>
@@ -74,12 +76,39 @@
     </div>
   </div>
 
+  <!-- Попап обновления фото профиля -->
+  <div class="popup" id="popup_profile_photo">
+    <div class="popup__content popup__content_theme_input">
+      <button class="popup__close page__buttons" id="button" type="button"></button>
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form class="form" action="#" name="userPhotoform">
+        <fieldset class="input-container">
+          <input id="url" type="url" class="input-container__item" name="profileLink" placeholder="Ссылка на фото" value="" tabindex="1" required>
+          <span class="input-container__input-error" id="url-error"></span>
+          <button type="submit" class="input-container__button">Сохранить</button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
+  <!-- Попап удаления карточки -->
+  <div class="popup" id="popup_delete">
+    <div class="popup__content popup__content_theme_delete">
+      <button class="popup__close page__buttons" id="button_photo" type="button"></button>
+      <h2 class="popup__title popup__title_theme_delete">Вы уверены?</h2>
+      <button type="submit" class="input-container__button input-container__button_type_delete">Да</button>
+    </div>
+  </div>
+
   <template id="card-template">
     <li class="element">
       <img class="element__image" src="#" alt="Изображение указанного района">
       <div class="element__description">
         <h2 class="element__title"></h2>
-        <button class="element__like-button page__buttons" type="button"></button>
+        <div class="element__like-area">
+          <button class="element__like-button page__buttons" type="button"></button>
+          <span class="element__like-counter">666</span>
+        </div>
         <button class="element__delete-button page__buttons" type="reset"></button>
       </div>
     </li>

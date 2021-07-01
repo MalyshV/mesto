@@ -1,5 +1,5 @@
 import './index.css';
-import { formElement, popupCardForm, popupCardOpenButton, popupProfileOpenButton, nameInput, jobInput, config } from '../utils/constants.js';
+import { formElement, popupCardForm, popupCardOpenButton, popupProfileOpenButton, nameInput, jobInput, config, profileIcon, changePhotoForm } from '../utils/constants.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { initialCards } from '../utils/initial-сards.js';
@@ -7,6 +7,17 @@ import { Section } from '../components/Section.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { UserInfo } from '../components/UserInfo.js';
+
+// Вы уверены?
+/*const OpenButton = document.querySelector('.profile__image');
+const deletePopup = document.querySelector('#popup_delete');
+
+console.log(deletePopup);
+console.log(OpenButton);
+
+OpenButton.addEventListener('click', () => {
+  deletePopup.classList.add('popup_is-opened')}
+);*/
 
 
 // Classes:
@@ -32,15 +43,19 @@ const popupEditProfile = new PopupWithForm(config.popupProfileSelector, () => {
   popupEditProfile.close();
 });
 
+const popupChangeUserPhoto = new PopupWithForm(config.popupUserPhotoSelector, () => {
+  popupChangeUserPhoto.close();
+});
+
 const userInfo = new UserInfo({
   nameSelector: '.profile__user-name',
-  jobSelector:'.profile__user-job',
+  jobSelector: '.profile__user-job',
 })
 
 const popupWithImage = new PopupWithImage(config.popupPhotoSelector);
 const cardFormValidator = new FormValidator(config, popupCardForm);
 const profileFormValidator = new FormValidator(config, formElement);
-
+const changePhotoValidator = new FormValidator(config, changePhotoForm);
 
 // Functions:
 const createCard = (data) => {
@@ -57,8 +72,10 @@ section.renderInitialCards();
 popupAddCard.setEventListeners();
 popupEditProfile.setEventListeners();
 popupWithImage.setEventListeners();
+popupChangeUserPhoto.setEventListeners();
 cardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
+changePhotoValidator.enableValidation();
 
 
 // Listeners:
@@ -78,3 +95,12 @@ popupProfileOpenButton.addEventListener('click', () => {
 
   profileFormValidator.removeFormErrors();
 });
+
+profileIcon.addEventListener('click', () => {
+  popupChangeUserPhoto.open();
+
+  changePhotoValidator.toggleButtonState();
+  changePhotoValidator.removeFormErrors();
+});
+
+
