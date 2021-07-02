@@ -32,7 +32,7 @@ const api = new Api({
 });
 
 const section = new Section({
-  items: initialCards,
+  items: initialCards, // в новой функции здесь будет пустой массив
   renderer: (data) => {
     createCard(data);
 
