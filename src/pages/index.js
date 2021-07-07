@@ -22,14 +22,21 @@ OpenButton.addEventListener('click', () => {
 
 
 // Classes:
-
 const api = new Api({
-  //baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-42',
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-25/',
   headers: {
-    //authorization: 'c56e30dc-2883-4270-a59e-b2f7bae969c6',
-    //'Content-Type': 'application/json'
+    authorization: '61426457-aa06-4805-b055-d8aeddd40fb8',
+    'Content-Type': 'application/json'
   }
 });
+
+/*const getUserInfo = {
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-25',
+  headers: {
+    authorization: '61426457-aa06-4805-b055-d8aeddd40fb8',
+    'Content-Type': 'application/json'
+  }
+}*/
 
 const section = new Section({
   items: initialCards, // в новой функции здесь будет пустой массив
@@ -48,24 +55,40 @@ const popupAddCard = new PopupWithForm(config.popupCardSelector, (data) => {
 });
 
 const popupEditProfile = new PopupWithForm(config.popupProfileSelector, () => {
-  userInfo.setUserInfo({name: nameInput.value, job: jobInput.value});
+  api.setUserInfo({name: nameInput.value, about: jobInput.value}) // test
+   .then((data) => {
+     userInfo.setUserInfo(data);
+   })
 
   popupEditProfile.close();
 });
 
-const popupChangeUserPhoto = new PopupWithForm(config.popupUserPhotoSelector, () => {
+const popupChangeUserPhoto = new PopupWithForm(config.popupUserPhotoSelector, (data) => {
+  handleAvatarFormSubmit(data);
+
   popupChangeUserPhoto.close();
 });
 
+function handleAvatarFormSubmit(data) {
+  api.setUserAvatar(data)
+    /*.then((data) => {
+      userInfo.setUserInfo(data);
+
+      //popupChangeUserPhoto.close();
+    })*/
+}
+
 const userInfo = new UserInfo({
   nameSelector: '.profile__user-name',
-  jobSelector: '.profile__user-job',
+  aboutSelector: '.profile__user-job',
+  avatarSelector: '.profile__image',
 })
 
 const popupWithImage = new PopupWithImage(config.popupPhotoSelector);
 const cardFormValidator = new FormValidator(config, popupCardForm);
 const profileFormValidator = new FormValidator(config, formElement);
 const changePhotoValidator = new FormValidator(config, changePhotoForm);
+
 
 // Functions:
 const createCard = (data) => {
@@ -78,6 +101,10 @@ const handleCardClick = (title, link) => {
   popupWithImage.open(title, link);
 };
 
+/*api.getUserInfo()
+  .then((data) => {
+    userInfo.getUserInfo(data)
+  });*/
 section.renderInitialCards();
 popupAddCard.setEventListeners();
 popupEditProfile.setEventListeners();
@@ -99,9 +126,16 @@ popupCardOpenButton.addEventListener('click', () => {
 popupProfileOpenButton.addEventListener('click', () => {
   popupEditProfile.open();
 
+  /*api.getUserInfo() // пока не работает, поправить
+  .then((data) => {
+    userInfo.getUserInfo(data)
+    nameInput.value = data.name;
+    jobInput.value = data.about;
+  });*/
+
   const data = userInfo.getUserInfo();
   nameInput.value = data.name;
-  jobInput.value = data.job;
+  jobInput.value = data.about;
 
   profileFormValidator.removeFormErrors();
 });

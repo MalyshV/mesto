@@ -32,7 +32,7 @@ class PopupWithForm extends Popup {
 
       const data = this._getInputValues();
       this._callBackSubmit(data);
-      this._changeAvatar();
+      //this._changeAvatar();
     });
   }
 

@@ -1,21 +1,28 @@
 class UserInfo {
-  constructor({ nameSelector, jobSelector }) {
+  constructor({ nameSelector, aboutSelector, avatarSelector }) {
     this._name = document.querySelector(nameSelector);
-    this._job = document.querySelector(jobSelector);
+    this._about = document.querySelector(aboutSelector);
+    this._avatar = document.querySelector(avatarSelector); // добавили аватар
   }
 
   getUserInfo() {
     this._userObject = {
       name: this._name.textContent,
-      job: this._job.textContent,
+      about: this._about.textContent,
+      avatar: this._avatar.src, // добавили аватар
     }
     return this._userObject;
   };
 
   setUserInfo(data) {
     this._name.textContent = data.name;
-    this._job.textContent = data.job;
+    this._about.textContent = data.about;
+    this._avatar.src = data.avatar; // добавили аватар
   };
+
+  setUserAvatar(data) {
+    this._avatar.src = data.avatar;
+  }
 }
 
 export { UserInfo };
