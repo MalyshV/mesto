@@ -50,34 +50,37 @@ const section = new Section({
 const popupAddCard = new PopupWithForm(config.popupCardSelector, (data) => {
   createCard(data);
   section.addItem(createCard(data).render());
-  showLoading(config.popupCardSelector, true);
+  renderLoading(config.popupCardSelector, true);
 
   //.finally() {
-    // showLoading(config.popupCardSelector, false);
+    // renderLoading(config.popupCardSelector, false);
   //}
 
   popupAddCard.close();
 });
 
 const popupEditProfile = new PopupWithForm(config.popupProfileSelector, () => {
-  showLoading(config.popupProfileSelector, true);
+  renderLoading(config.popupProfileSelector, true);
   api.setUserInfo({name: nameInput.value, about: jobInput.value}) // test
    .then((data) => {
      userInfo.setUserInfo(data);
    })
-   //.finally() {
-    // showLoading(config.popupCardSelector, false);
-  //}
+   .catch((error) => {
+     console.log(error);
+   })
+   .finally(() => {
+    renderLoading(config.popupCardSelector, false);
+  })
 
   popupEditProfile.close();
 });
 
 const popupChangeUserPhoto = new PopupWithForm(config.popupUserPhotoSelector, (data) => {
   handleAvatarFormSubmit(data);
-  showLoading(config.popupUserPhotoSelector, true);
+  renderLoading(config.popupUserPhotoSelector, true);
 
   //.finally() {
-    // showLoading(config.popupCardSelector, false);
+    // renderLoading(config.popupCardSelector, false);
   //}
 
   popupChangeUserPhoto.close();
@@ -115,8 +118,7 @@ const handleCardClick = (title, link) => {
   popupWithImage.open(title, link);
 };
 
-// Сохранение...
-const showLoading = (isLoading) => {
+const renderLoading = (isLoading) => {
   if(isLoading) {
     submitButton.textContent = 'Сохранение...';
   } else {

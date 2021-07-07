@@ -1,17 +1,14 @@
 class Api {
-  constructor({baseUrl, headers}) {
-    this._baseUrl = baseUrl;
-    this._headers = headers;
+  constructor(config) {
+    this._baseUrl = config.baseUrl;
+    this._headers = config.headers;
   }
 
   // 1. загрузка информации о пользователе с сервера
   getUserInfo() {  // не работает
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-25/users/me', {
-      //method: 'GET',
-      headers: {
-        authorization: '61426457-aa06-4805-b055-d8aeddd40fb8',
-        'Content-Type': 'application/json',
-    }
+    return fetch(`${this._baseUrl}users/me`, {
+      method: 'GET',
+      headers: this._headers,
   })
     .then(res => {
       if (res.ok) {

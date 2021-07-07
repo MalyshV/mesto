@@ -2,10 +2,7 @@
   border-radius: 50%;
   width: 120px;
   height: 120px;
-  /* ниже тест
-  background-size: contain;
-  height: 120px;
-  background-image: url(../../../images/image.jpg);*/
+  object-fit: cover;
 }
 
 @media (max-width: 700px) {
