@@ -8,6 +8,7 @@ export const jobInput = document.querySelector('[name="user-job"]');
 export const profileName = document.querySelector('.profile__user-name');
 export const profileJob = document.querySelector('.profile__user-job');
 export const profileIcon = document.querySelector('.profile__image');
+export const submitButton = document.querySelector('.input-container__button');
 
 export const config = {
   formSelector: '.form',

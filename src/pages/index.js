@@ -1,5 +1,5 @@
 import './index.css';
-import { formElement, popupCardForm, popupCardOpenButton, popupProfileOpenButton, nameInput, jobInput, config, profileIcon, changePhotoForm } from '../utils/constants.js';
+import { formElement, popupCardForm, popupCardOpenButton, popupProfileOpenButton, nameInput, jobInput, config, profileIcon, changePhotoForm, submitButton } from '../utils/constants.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { initialCards } from '../utils/initial-сards.js';
@@ -50,21 +50,35 @@ const section = new Section({
 const popupAddCard = new PopupWithForm(config.popupCardSelector, (data) => {
   createCard(data);
   section.addItem(createCard(data).render());
+  showLoading(config.popupCardSelector, true);
+
+  //.finally() {
+    // showLoading(config.popupCardSelector, false);
+  //}
 
   popupAddCard.close();
 });
 
 const popupEditProfile = new PopupWithForm(config.popupProfileSelector, () => {
+  showLoading(config.popupProfileSelector, true);
   api.setUserInfo({name: nameInput.value, about: jobInput.value}) // test
    .then((data) => {
      userInfo.setUserInfo(data);
    })
+   //.finally() {
+    // showLoading(config.popupCardSelector, false);
+  //}
 
   popupEditProfile.close();
 });
 
 const popupChangeUserPhoto = new PopupWithForm(config.popupUserPhotoSelector, (data) => {
   handleAvatarFormSubmit(data);
+  showLoading(config.popupUserPhotoSelector, true);
+
+  //.finally() {
+    // showLoading(config.popupCardSelector, false);
+  //}
 
   popupChangeUserPhoto.close();
 });
@@ -100,6 +114,15 @@ const createCard = (data) => {
 const handleCardClick = (title, link) => {
   popupWithImage.open(title, link);
 };
+
+// Сохранение...
+const showLoading = (isLoading) => {
+  if(isLoading) {
+    submitButton.textContent = 'Сохранение...';
+  } else {
+    submitButton.textContent = 'Сохранить';
+  }
+}
 
 /*api.getUserInfo()
   .then((data) => {
