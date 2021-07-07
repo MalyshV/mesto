@@ -5,7 +5,7 @@ class Api {
   }
 
   // 1. загрузка информации о пользователе с сервера
-  getUserInfo() {  // не работает
+  getUserInfo() {  // странно работает
     return fetch(`${this._baseUrl}users/me`, {
       method: 'GET',
       headers: this._headers,
@@ -61,19 +61,20 @@ class Api {
   // 7. поставнока и снятие лайка карточки
 
   // 8. обновление аватара пользователя
-  setUserAvatar(data) { // changeAvatar??  // не идет
+  setUserAvatar(link) {
     return fetch(`${this._baseUrl}users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: data.avatar,
+        avatar: link,
       })
     })
     .then(res => {
       if (res.ok) {
         return res.json();
       }
-      return Promise.reject(`Ошибка: ${res.status}`);
+      //return Promise.reject(`Ошибка: ${res.status}`);
+      return Promise.reject('Да, вот она ошибка!!!');
     });
   }
 

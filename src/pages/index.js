@@ -1,5 +1,5 @@
 import './index.css';
-import { formElement, popupCardForm, popupCardOpenButton, popupProfileOpenButton, nameInput, jobInput, config, profileIcon, changePhotoForm, submitButton } from '../utils/constants.js';
+import { formElement, popupCardForm, popupCardOpenButton, popupProfileOpenButton, nameInput, jobInput, config, changePhotoForm, profileName, profileJob, profileIcon } from '../utils/constants.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { initialCards } from '../utils/initial-сards.js';
@@ -23,20 +23,20 @@ OpenButton.addEventListener('click', () => {
 
 // Classes:
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-25/',
+  baseUrl: 'https://nomoreparties.co/v1/cohort-25/',
   headers: {
     authorization: '61426457-aa06-4805-b055-d8aeddd40fb8',
     'Content-Type': 'application/json'
   }
 });
 
-/*const getUserInfo = {
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-25',
-  headers: {
-    authorization: '61426457-aa06-4805-b055-d8aeddd40fb8',
-    'Content-Type': 'application/json'
-  }
-}*/
+api.getUserInfo()
+  .then((data) => {
+    console.log(data);
+    profileName.textContent = data.name;
+    profileJob.textContent = data.about;
+    profileIcon.src = data.avatar;
+  })
 
 const section = new Section({
   items: initialCards, // в новой функции здесь будет пустой массив
@@ -50,17 +50,17 @@ const section = new Section({
 const popupAddCard = new PopupWithForm(config.popupCardSelector, (data) => {
   createCard(data);
   section.addItem(createCard(data).render());
-  renderLoading(config.popupCardSelector, true);
+  popupAddCard.renderLoading(true);
 
   //.finally() {
-    // renderLoading(config.popupCardSelector, false);
+    // popupAddCard.renderLoading(true);;
   //}
 
   popupAddCard.close();
 });
 
 const popupEditProfile = new PopupWithForm(config.popupProfileSelector, () => {
-  renderLoading(config.popupProfileSelector, true);
+  popupEditProfile.renderLoading(true);
   api.setUserInfo({name: nameInput.value, about: jobInput.value}) // test
    .then((data) => {
      userInfo.setUserInfo(data);
@@ -69,31 +69,28 @@ const popupEditProfile = new PopupWithForm(config.popupProfileSelector, () => {
      console.log(error);
    })
    .finally(() => {
-    renderLoading(config.popupCardSelector, false);
+    popupEditProfile.renderLoading(false);
   })
 
   popupEditProfile.close();
 });
 
-const popupChangeUserPhoto = new PopupWithForm(config.popupUserPhotoSelector, (data) => {
-  handleAvatarFormSubmit(data);
-  renderLoading(config.popupUserPhotoSelector, true);
-
-  //.finally() {
-    // renderLoading(config.popupCardSelector, false);
-  //}
-
-  popupChangeUserPhoto.close();
+const popupChangeUserPhoto = new PopupWithForm(config.popupUserPhotoSelector, (info) => {
+  popupChangeUserPhoto.renderLoading(true);
+  api.setUserAvatar(info.link)
+    .then((data) => {
+      userInfo.setUserAvatar(data);
+    })
+    .then(() => {
+      popupChangeUserPhoto.close();
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {
+      popupChangeUserPhoto.renderLoading(false);
+   })
 });
-
-function handleAvatarFormSubmit(data) {
-  api.setUserAvatar(data)
-    /*.then((data) => {
-      userInfo.setUserInfo(data);
-
-      //popupChangeUserPhoto.close();
-    })*/
-}
 
 const userInfo = new UserInfo({
   nameSelector: '.profile__user-name',
@@ -118,18 +115,6 @@ const handleCardClick = (title, link) => {
   popupWithImage.open(title, link);
 };
 
-const renderLoading = (isLoading) => {
-  if(isLoading) {
-    submitButton.textContent = 'Сохранение...';
-  } else {
-    submitButton.textContent = 'Сохранить';
-  }
-}
-
-/*api.getUserInfo()
-  .then((data) => {
-    userInfo.getUserInfo(data)
-  });*/
 section.renderInitialCards();
 popupAddCard.setEventListeners();
 popupEditProfile.setEventListeners();
@@ -150,13 +135,6 @@ popupCardOpenButton.addEventListener('click', () => {
 
 popupProfileOpenButton.addEventListener('click', () => {
   popupEditProfile.open();
-
-  /*api.getUserInfo() // пока не работает, поправить
-  .then((data) => {
-    userInfo.getUserInfo(data)
-    nameInput.value = data.name;
-    jobInput.value = data.about;
-  });*/
 
   const data = userInfo.getUserInfo();
   nameInput.value = data.name;

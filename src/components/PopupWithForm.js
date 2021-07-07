@@ -5,6 +5,7 @@ class PopupWithForm extends Popup {
     super(popupSelector);
     this._callBackSubmit = callBackSubmit;
     this._formItem = this._popupItem.querySelector('.form');
+    this._submitButton = this._popupItem.querySelector('.input-container__button');
   }
 
   _getInputValues() {
@@ -34,6 +35,14 @@ class PopupWithForm extends Popup {
       this._callBackSubmit(data);
       //this._changeAvatar();
     });
+  }
+
+  renderLoading(isLoading) {
+    if(isLoading) {
+      this._submitButton.textContent = 'Сохранение...';
+    } else {
+      this._submitButton.textContent = 'Сохранить';
+    }
   }
 
   close() {
