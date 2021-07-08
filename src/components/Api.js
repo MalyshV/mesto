@@ -5,7 +5,7 @@ class Api {
   }
 
   // 1. загрузка информации о пользователе с сервера
-  getUserInfo() {  // странно работает
+  getUserInfo() {
     return fetch(`${this._baseUrl}users/me`, {
       method: 'GET',
       headers: this._headers,
@@ -32,6 +32,24 @@ class Api {
       });
   }
 
+  // 4. добавление новой карточки
+  /*addNewCard(name, link) {
+    return fetch(`${this._baseUrl}cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name,
+        link: link
+      })
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }*/
+
   // 3. Редактирование профиля
   setUserInfo(data) {
     return fetch(`${this._baseUrl}users/me`, {
@@ -50,8 +68,6 @@ class Api {
     });
   }
 
-  // 4. добавление новой карточки
-
   // 5. отображение количества лайков карточки
 
   // 6. удаление карточки
@@ -59,7 +75,7 @@ class Api {
   // 7. поставнока и снятие лайка карточки
 
   // 8. обновление аватара пользователя
-  setUserAvatar(link) {
+  changeAvatar(link) {
     return fetch(`${this._baseUrl}users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,

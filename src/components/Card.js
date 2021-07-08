@@ -1,10 +1,11 @@
 class Card {
-  constructor (cardData, templateSelector, handleCardClick) {
+  constructor (cardData, templateSelector, /*userId,*/ handleCardClick) {
+    //this._cardData = cardData;
     this._title = cardData.name;
     this._link = cardData.link;
     this._likes = cardData.likes;
-    this._cardId = cardData._id;
-    this._userId = cardData.userId; // мои данные
+    //this._cardId = cardData._id;
+    //this._userId = userId; // мои данные
     this._templateSelector = templateSelector;
     this.handleCardClick = handleCardClick;
   }
@@ -23,8 +24,14 @@ class Card {
     this._newCard.querySelector('.element__title').textContent = this._title;
     this._photo.src = this._link;
     this._photo.alt = this._title;
-    this._setEventListeners(); // добавила. нужно ли?
     this._likeCounter = this._newCard.querySelector('.element__like-counter');
+
+    this._setEventListeners();
+
+    /*if (this._cardData.owner._id !== this._userId) {
+      //console.log(this._cardData.owner._id);
+      this._cardRemoveButton.remove();
+    }*/
 
     return this._newCard;
   }
@@ -33,7 +40,7 @@ class Card {
     this._photo.addEventListener('click', () => {
       this.handleCardClick(this._title, this._link);
     });
-    this._cardRemoveButton.addEventListener('click', (event) => this._handleRemoveClick(event));
+    // this._cardRemoveButton.addEventListener('click', (event) => this.handleRemoveClick(event)); // должна реагировать форма при сабмите
     this._cardLikeButton.addEventListener('click', (event) => this._handleLikeClick(event));
     //this._cardLikeButton.addEventListener('click', (event) => this._countLikes(event));
   }
@@ -74,16 +81,9 @@ class Card {
     })
   }*/
 
-  _handleRemoveClick() {
-    this._newCard.closest('.element').remove();
+  _handleRemoveClick() { // пробуем переделать
+    this._newCard.remove();
   }
-
-  /*render() {
-    this._createCard();
-    this._setEventListeners();
-
-    return this._newCard;
-  }*/
 }
 
 export { Card };

@@ -20,9 +20,9 @@ class UserInfo {
     this._avatar.src = data.avatar; // добавили аватар
   };
 
-  /*setUserAvatar(data) {
-    this._avatar.src = data.avatar;
-  }*/
+  setUserAvatar(link) {
+    this._avatar.src = link;
+  }
 }
 
 export { UserInfo };

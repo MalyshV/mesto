@@ -2,23 +2,12 @@ import './index.css';
 import { formElement, popupCardForm, popupCardOpenButton, popupProfileOpenButton, nameInput, jobInput, config, changePhotoForm, profileName, profileJob, profileIcon } from '../utils/constants.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
-import { initialCards } from '../utils/initial-сards.js';
 import { Section } from '../components/Section.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
+import { PopupWithSubmit } from '../components/popupWithSubmit.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { Api } from '../components/Api.js';
-
-// Вы уверены?
-/*const OpenButton = document.querySelector('.profile__image');
-const deletePopup = document.querySelector('#popup_delete');
-
-console.log(deletePopup);
-console.log(OpenButton);
-
-OpenButton.addEventListener('click', () => {
-  deletePopup.classList.add('popup_is-opened')}
-);*/
 
 
 // Classes:
@@ -47,7 +36,7 @@ api.getInitialCards()
     console.log(error);
   })
 
-let userId = null;
+let userId; // засунуть в создание карточек
 
 api.getUserInfo()
   .then((data) => {
@@ -57,16 +46,15 @@ api.getUserInfo()
     profileIcon.src = data.avatar;
   })
 
-const popupAddCard = new PopupWithForm(config.popupCardSelector, (data) => {
-  addNewCard(data);
-  popupAddCard.renderLoading(true);
+  const popupAddCard = new PopupWithForm(config.popupCardSelector, (data) => {
+    popupAddCard.renderLoading(true);
+    addNewCard(data);
+      //.finally(() => {
+        //popupAddCard.renderLoading(false);
+      //})
 
-  //.finally() {
-    // popupAddCard.renderLoading(true);;
-  //}
-
-  popupAddCard.close();
-});
+    popupAddCard.close();
+  });
 
 const popupEditProfile = new PopupWithForm(config.popupProfileSelector, () => {
   popupEditProfile.renderLoading(true);
@@ -84,13 +72,11 @@ const popupEditProfile = new PopupWithForm(config.popupProfileSelector, () => {
   popupEditProfile.close();
 });
 
-const popupChangeUserPhoto = new PopupWithForm(config.popupUserPhotoSelector, (info) => {
+const popupChangeUserPhoto = new PopupWithForm(config.popupUserPhotoSelector, (data) => {
   popupChangeUserPhoto.renderLoading(true);
-  api.setUserAvatar(info.link)
-    .then((data) => {
-      userInfo.setUserAvatar(data);
-    })
+  api.changeAvatar(data.avatar)
     .then(() => {
+      userInfo.setUserAvatar(data.avatar);
       popupChangeUserPhoto.close();
     })
     .catch((error) => {
@@ -100,6 +86,10 @@ const popupChangeUserPhoto = new PopupWithForm(config.popupUserPhotoSelector, (i
       popupChangeUserPhoto.renderLoading(false);
    })
 });
+
+const popupDelete = new PopupWithSubmit(config.popupDeleteSelector, () => {
+
+})
 
 const userInfo = new UserInfo({
   nameSelector: '.profile__user-name',
@@ -126,7 +116,6 @@ function addNewCard(item){
   const cardItem = createCard(item);
         section.addItem(cardItem);
 }
-
 const handleCardClick = (title, link) => {
   popupWithImage.open(title, link);
 };
@@ -135,6 +124,7 @@ popupAddCard.setEventListeners();
 popupEditProfile.setEventListeners();
 popupWithImage.setEventListeners();
 popupChangeUserPhoto.setEventListeners();
+popupDelete.setEventListeners();
 cardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
 changePhotoValidator.enableValidation();
@@ -163,4 +153,10 @@ profileIcon.addEventListener('click', () => {
 
   changePhotoValidator.toggleButtonState();
   changePhotoValidator.removeFormErrors();
+});
+
+const OpenButton = document.querySelector('.header__logo');
+
+OpenButton.addEventListener('click', () => {
+  popupDelete.open();
 });
