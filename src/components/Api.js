@@ -33,7 +33,7 @@ class Api {
   }
 
   // 4. добавление новой карточки
-  /*addNewCard(name, link) {
+  addNewCard(name, link) {
     return fetch(`${this._baseUrl}cards`, {
       method: 'POST',
       headers: this._headers,
@@ -48,7 +48,7 @@ class Api {
       }
       return Promise.reject(`Ошибка: ${res.status}`);
     });
-  }*/
+  }
 
   // 3. Редактирование профиля
   setUserInfo(data) {
@@ -75,20 +75,19 @@ class Api {
   // 7. поставнока и снятие лайка карточки
 
   // 8. обновление аватара пользователя
-  changeAvatar(link) {
+  setUserAvatar(data) {
     return fetch(`${this._baseUrl}users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: link,
+        avatar: data.link,
       })
     })
     .then(res => {
       if (res.ok) {
         return res.json();
       }
-      //return Promise.reject(`Ошибка: ${res.status}`);
-      return Promise.reject('Проверка ошибки!!!');
+      return Promise.reject(`Ошибка: ${res.status}`);
     });
   }
 

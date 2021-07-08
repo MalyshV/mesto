@@ -1,13 +1,15 @@
 class Card {
-  constructor (cardData, templateSelector, /*userId,*/ handleCardClick) {
-    //this._cardData = cardData;
+  constructor ({ cardData, handleCardClick, handleLikeClick, handleRemoveClick }, templateSelector, /*userId*/) {
+    this._cardData = cardData;
     this._title = cardData.name;
     this._link = cardData.link;
     this._likes = cardData.likes;
-    //this._cardId = cardData._id;
-    //this._userId = userId; // мои данные
+    this._cardId = cardData._id;
+    //this._userId = cardData.userId; // мои данные
     this._templateSelector = templateSelector;
     this.handleCardClick = handleCardClick;
+    this._handleLikeClick = handleLikeClick;
+    this._handleRemoveClick = handleRemoveClick;
   }
 
   _getTemplate() {
@@ -29,8 +31,8 @@ class Card {
     this._setEventListeners();
 
     /*if (this._cardData.owner._id !== this._userId) {
-      //console.log(this._cardData.owner._id);
-      this._cardRemoveButton.remove();
+      //console.log('чужие карточки');
+      this._cardRemoveButton.remove(); // из-за этого перестала добавляться новая карточка
     }*/
 
     return this._newCard;
@@ -40,7 +42,7 @@ class Card {
     this._photo.addEventListener('click', () => {
       this.handleCardClick(this._title, this._link);
     });
-    // this._cardRemoveButton.addEventListener('click', (event) => this.handleRemoveClick(event)); // должна реагировать форма при сабмите
+    this._cardRemoveButton.addEventListener('click', () => this._handleRemoveClick(this)); // нужен ли аргумент?
     this._cardLikeButton.addEventListener('click', (event) => this._handleLikeClick(event));
     //this._cardLikeButton.addEventListener('click', (event) => this._countLikes(event));
   }
@@ -81,7 +83,7 @@ class Card {
     })
   }*/
 
-  _handleRemoveClick() { // пробуем переделать
+  removeCard() {
     this._newCard.remove();
   }
 }

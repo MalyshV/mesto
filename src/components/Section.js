@@ -11,9 +11,7 @@ class Section {
   };
 
   renderInitialCards() {
-    this._items.forEach(data => {
-      this._element.append(this._renderer(data));
-    });
+    this._items.forEach(item => this._renderer(item));
   }
 }
 

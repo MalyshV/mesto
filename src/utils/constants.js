@@ -5,6 +5,7 @@ export const formElement = document.querySelector('[name="profile-form"]');
 export const changePhotoForm = document.querySelector('[name="userPhotoform"]');
 export const nameInput = document.querySelector('[name="user-name"]');
 export const jobInput = document.querySelector('[name="user-job"]');
+export const avatarInput = document.querySelector('[name="profileLink"]');
 export const profileName = document.querySelector('.profile__user-name');
 export const profileJob = document.querySelector('.profile__user-job');
 export const profileIcon = document.querySelector('.profile__image');
