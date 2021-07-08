@@ -71,6 +71,18 @@ class Api {
   // 5. отображение количества лайков карточки
 
   // 6. удаление карточки
+  removeCard(cardId) {
+    return fetch(`${this._baseUrl}cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers,
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }
 
   // 7. поставнока и снятие лайка карточки
 

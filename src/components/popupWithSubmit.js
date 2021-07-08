@@ -1,18 +1,18 @@
 import { Popup } from './Popup.js';
 
-class PopupWithSubmit extends Popup {
-  constructor(popupSelector, callBackSubmit) {
-    super(popupSelector, callBackSubmit);
+class PopupWithSubmit extends Popup { // не идет, переделать
+    setOnSubmit(action) {
+      this._handleRemoveClick = action;
+    }
     // хендлер удаления карточки??
-    this._submitRemoveButton = this._popupItem.querySelector('.input-container__button_type_delete');
-  }
+
+    //this._submitButton = this._popupItem.querySelector('.input-container__button');
 
   setEventListeners() {
     this._popupItem.addEventListener('submit', (event) => {
       event.preventDefault();
-      this._submitRemoveButton.addEventListener('click', () => {
-      });
-    })
+      this._handleRemoveClick();
+    });
 
     super.setEventListeners();
   }

@@ -28,7 +28,7 @@ api.getInitialCards()
     section = new Section({
       items: data,
       renderer: (item) => {
-        addNewCard(item);
+        addCart(item);
       }
     }, config.containerSelector)
     section.renderInitialCards();
@@ -50,8 +50,8 @@ api.getUserInfo(userInfo => {
     popupAddCard.renderLoading(true);
     api.addNewCard(data)
       .then((cardData) => {
-        const card = createCard(cardData);
-        section.addItem(card);
+        addCart(cardData);
+
         popupAddCard.close();
       })
       .catch((error) => {
@@ -95,7 +95,7 @@ const popupChangeUserPhoto = new PopupWithForm(config.popupUserPhotoSelector, ()
 
 const popupDelete = new PopupWithSubmit(config.popupDeleteSelector, () => {
   const cardId = popupDelete.cardObject._cardId;
-  api.popupDelete(cardId)
+  api.removeCard(cardId)
     .then(() => {
       popupDelete.cardObject.removeCard();
       popupDelete.close();
@@ -123,18 +123,34 @@ const createCard = (cardData) => {
     handleCardClick: (title, link) => {
       popupWithImage.open(title, link);
     },
-    handleRemoveClick: (data) => {
-      popupDelete.data = data;
+    handleRemoveClick: (cardId, cardItem) => { // переделать хендлер
       popupDelete.open();
+      popupDelete.setonSubmit(() => {
+        popupDelete.renderLoading(true)
+        api.removeCard(cardId)
+          .then(res => {
+            if(res.ok) {
+              return cardItem.remove();
+            }
+            return Promise.reject('Ошибка')
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+          .finally(() => {
+            popupDelete.renderLoading(false);
+            popupDelete.close();
+          })
+      })
     },
     // handleLikeClick:
-  }, config.templateSelector);
+    }, config.templateSelector);
 
   const cardItem = card.createCard();
   return cardItem;
 };
 
-function addNewCard(item){
+function addCart(item){
   const cardItem = createCard(item);
         section.addItem(cardItem);
 }
@@ -172,10 +188,4 @@ profileIcon.addEventListener('click', () => {
 
   changePhotoValidator.toggleButtonState();
   changePhotoValidator.removeFormErrors();
-});
-
-const OpenButton = document.querySelector('.header__logo');
-
-OpenButton.addEventListener('click', () => {
-  popupDelete.open();
 });

@@ -1,11 +1,11 @@
 class Card {
-  constructor ({ cardData, handleCardClick, handleLikeClick, handleRemoveClick }, templateSelector, userId) {
+  constructor ({ cardData, handleCardClick, handleLikeClick, handleRemoveClick }, templateSelector, /*userId*/) {
     this._cardData = cardData;
     this._title = cardData.name;
     this._link = cardData.link;
     this._likes = cardData.likes;
-    this._cardId = cardData._id;
-    this._userId = cardData.userId; // мои данные
+    this.cardId = cardData._id;
+    //this._userId = cardData.userId; // мои данные
     this._templateSelector = templateSelector;
     this.handleCardClick = handleCardClick;
     this._handleLikeClick = handleLikeClick;
@@ -30,10 +30,9 @@ class Card {
 
     this._setEventListeners();
 
-    if (this._cardData.owner._id !== this._userId) {
-      //console.log('чужие карточки');
+    /*if (this._cardData.owner._id !== this._userId) {
       this._cardRemoveButton.remove(); // из-за этого перестала добавляться новая карточка
-    }
+    }*/
 
     return this._newCard;
   }
@@ -42,7 +41,7 @@ class Card {
     this._photo.addEventListener('click', () => {
       this.handleCardClick(this._title, this._link);
     });
-    this._cardRemoveButton.addEventListener('click', () => this._handleRemoveClick(this)); // нужен ли аргумент?
+    this._cardRemoveButton.addEventListener('click', () => this.remove()); // нужен ли аргумент?
     this._cardLikeButton.addEventListener('click', (event) => this._handleLikeClick(event));
     //this._cardLikeButton.addEventListener('click', (event) => this._countLikes(event));
   }
@@ -83,8 +82,8 @@ class Card {
     })
   }*/
 
-  removeCard() {
-    this._newCard.remove();
+  remove() {
+    this._handleRemoveClick(this._cardID, this._newCard);
   }
 }
 
