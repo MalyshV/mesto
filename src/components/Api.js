@@ -33,13 +33,13 @@ class Api {
   }
 
   // 4. добавление новой карточки
-  addNewCard(name, link) {
+  addNewCard(data) {
     return fetch(`${this._baseUrl}cards`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
-        name: name,
-        link: link
+        name: data.name,
+        link: data.link,
       })
     })
     .then(res => {
@@ -90,8 +90,6 @@ class Api {
       return Promise.reject(`Ошибка: ${res.status}`);
     });
   }
-
-  // 9. улучшенный UX всех форм
 }
 
 export { Api };

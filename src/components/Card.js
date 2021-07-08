@@ -1,11 +1,11 @@
 class Card {
-  constructor ({ cardData, handleCardClick, handleLikeClick, handleRemoveClick }, templateSelector, /*userId*/) {
+  constructor ({ cardData, handleCardClick, handleLikeClick, handleRemoveClick }, templateSelector, userId) {
     this._cardData = cardData;
     this._title = cardData.name;
     this._link = cardData.link;
     this._likes = cardData.likes;
     this._cardId = cardData._id;
-    //this._userId = cardData.userId; // мои данные
+    this._userId = cardData.userId; // мои данные
     this._templateSelector = templateSelector;
     this.handleCardClick = handleCardClick;
     this._handleLikeClick = handleLikeClick;
@@ -30,10 +30,10 @@ class Card {
 
     this._setEventListeners();
 
-    /*if (this._cardData.owner._id !== this._userId) {
+    if (this._cardData.owner._id !== this._userId) {
       //console.log('чужие карточки');
       this._cardRemoveButton.remove(); // из-за этого перестала добавляться новая карточка
-    }*/
+    }
 
     return this._newCard;
   }
@@ -64,7 +64,7 @@ class Card {
 
       likeCounter.textContent = 667;
 
-      console.log(likeCounter.textContent);
+      //console.log(likeCounter.textContent);
       //likeCounter.textContent += 1;
     }
   }

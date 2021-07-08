@@ -11,7 +11,6 @@ import { Api } from '../components/Api.js';
 
 
 // Classes:
-
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-25/',
   headers: {
@@ -42,7 +41,6 @@ api.getUserInfo(userInfo => {
   userId = userInfo._id;
 })
   .then((data) => {
-    console.log(data);
     profileName.textContent = data.name;
     profileJob.textContent = data.about;
     profileIcon.src = data.avatar;
@@ -50,12 +48,18 @@ api.getUserInfo(userInfo => {
 
   const popupAddCard = new PopupWithForm(config.popupCardSelector, (data) => {
     popupAddCard.renderLoading(true);
-    addNewCard(data);
-      //.finally(() => {
-        //popupAddCard.renderLoading(false);
-      //})
-
-    popupAddCard.close();
+    api.addNewCard(data)
+      .then((cardData) => {
+        const card = createCard(cardData);
+        section.addItem(card);
+        popupAddCard.close();
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        popupAddCard.renderLoading(false);
+      })
   });
 
 const popupEditProfile = new PopupWithForm(config.popupProfileSelector, () => {
@@ -97,7 +101,7 @@ const popupDelete = new PopupWithSubmit(config.popupDeleteSelector, () => {
       popupDelete.close();
       popupDelete.cardObject = '';
     })
-})
+}) // не удаляет пока
 
 const userInfo = new UserInfo({
   nameSelector: '.profile__user-name',
