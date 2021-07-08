@@ -23,12 +23,31 @@ OpenButton.addEventListener('click', () => {
 
 // Classes:
 const api = new Api({
-  baseUrl: 'https://nomoreparties.co/v1/cohort-25/',
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-25/',
   headers: {
     authorization: '61426457-aa06-4805-b055-d8aeddd40fb8',
     'Content-Type': 'application/json'
   }
 });
+
+let section;
+
+//рендер дефолтных карточек
+api.getInitialCards()
+  .then((data) => {
+    section = new Section({
+      items: data,
+      renderer: (item) => {
+        addNewCard(item);
+      }
+    }, config.containerSelector)
+    section.renderInitialCards();
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+
+let userId = null;
 
 api.getUserInfo()
   .then((data) => {
@@ -38,18 +57,8 @@ api.getUserInfo()
     profileIcon.src = data.avatar;
   })
 
-const section = new Section({
-  items: initialCards, // в новой функции здесь будет пустой массив
-  renderer: (data) => {
-    createCard(data);
-
-    return createCard(data).render();
-  }
-}, config.containerSelector);
-
 const popupAddCard = new PopupWithForm(config.popupCardSelector, (data) => {
-  createCard(data);
-  section.addItem(createCard(data).render());
+  addNewCard(data);
   popupAddCard.renderLoading(true);
 
   //.finally() {
@@ -105,17 +114,23 @@ const changePhotoValidator = new FormValidator(config, changePhotoForm);
 
 
 // Functions:
+// рендер карточки
 const createCard = (data) => {
   const card = new Card(data, config.templateSelector, handleCardClick);
 
-  return card;
+  const cardItem = card.createCard();
+  return cardItem;
 };
+
+function addNewCard(item){
+  const cardItem = createCard(item);
+        section.addItem(cardItem);
+}
 
 const handleCardClick = (title, link) => {
   popupWithImage.open(title, link);
 };
 
-section.renderInitialCards();
 popupAddCard.setEventListeners();
 popupEditProfile.setEventListeners();
 popupWithImage.setEventListeners();
@@ -149,5 +164,3 @@ profileIcon.addEventListener('click', () => {
   changePhotoValidator.toggleButtonState();
   changePhotoValidator.removeFormErrors();
 });
-
-

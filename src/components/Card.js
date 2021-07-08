@@ -2,25 +2,31 @@ class Card {
   constructor (cardData, templateSelector, handleCardClick) {
     this._title = cardData.name;
     this._link = cardData.link;
+    this._likes = cardData.likes;
+    this._cardId = cardData._id;
+    this._userId = cardData.userId; // мои данные
     this._templateSelector = templateSelector;
     this.handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
-    const cardTemplate = document.querySelector(this._templateSelector);
-    this._newCard = cardTemplate.content.querySelector('.element').cloneNode(true);
+    const cardItem = document.querySelector(this._templateSelector).content.querySelector('.element').cloneNode(true);
+
+    return cardItem;
   }
 
-  _createCard() {
-    this._getTemplate();
-
+  createCard() {
+    this._newCard = this._getTemplate();
     this._cardRemoveButton = this._newCard.querySelector('.element__delete-button');
     this._cardLikeButton = this._newCard.querySelector('.element__like-button');
     this._photo = this._newCard.querySelector('.element__image');
-
     this._newCard.querySelector('.element__title').textContent = this._title;
     this._photo.src = this._link;
     this._photo.alt = this._title;
+    this._setEventListeners(); // добавила. нужно ли?
+    this._likeCounter = this._newCard.querySelector('.element__like-counter');
+
+    return this._newCard;
   }
 
   _setEventListeners() {
@@ -32,14 +38,26 @@ class Card {
     //this._cardLikeButton.addEventListener('click', (event) => this._countLikes(event));
   }
 
-  _handleLikeClick() {
-    this._cardLikeButton.classList.toggle('element__like-button_active');
-    const likeCounter = this._newCard.querySelector('.element__like-counter');
+  _getLike() {
+    this._handleLikeClick(this._userId, this.liked)
+      .then((data) => {
+        this._cardLikeButton.classList.toggle('element__like-button_active');
+        this.liked = !this.liked;
+        this._likeCounter.textContent = data.likes.length;
+      })
+      .catch((error) => {
+        console.log(error);
+      })
 
-    likeCounter.textContent = 667;
+    {
+      this._cardLikeButton.classList.toggle('element__like-button_active');
+      const likeCounter = this._newCard.querySelector('.element__like-counter');
 
-    console.log(likeCounter.textContent);
-    //likeCounter.textContent += 1;
+      likeCounter.textContent = 667;
+
+      console.log(likeCounter.textContent);
+      //likeCounter.textContent += 1;
+    }
   }
 
   // Тестим счетчик лайков
@@ -60,12 +78,12 @@ class Card {
     this._newCard.closest('.element').remove();
   }
 
-  render() {
+  /*render() {
     this._createCard();
     this._setEventListeners();
 
     return this._newCard;
-  }
+  }*/
 }
 
 export { Card };

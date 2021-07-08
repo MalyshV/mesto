@@ -19,12 +19,10 @@ class Api {
   }
 
   // 2. загрузка карточек с сервера
-  /*getInitialCards() {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-25/cards', {
-      headers: {
-        authorization: '61426457-aa06-4805-b055-d8aeddd40fb8',
-        'Content-Type': 'application/json'
-      }
+  getInitialCards() {
+    return fetch(`${this._baseUrl}cards`, {
+      method: 'GET',
+      headers: this._headers,
     })
       .then(res => {
         if (res.ok) {
@@ -32,7 +30,7 @@ class Api {
         }
         return Promise.reject(`Ошибка: ${res.status}`);
       });
-  } */
+  }
 
   // 3. Редактирование профиля
   setUserInfo(data) {
@@ -74,7 +72,7 @@ class Api {
         return res.json();
       }
       //return Promise.reject(`Ошибка: ${res.status}`);
-      return Promise.reject('Да, вот она ошибка!!!');
+      return Promise.reject('Проверка ошибки!!!');
     });
   }
 
