@@ -19,12 +19,22 @@ const api = new Api({
   }
 });
 
-let userId = null;
+api.waitPromise(); // проверила через несколько консоль.логов, первыми загружаются данные юзера
+
+let myUserId = null;
 let section;
+
+// данные пользователя
+const userInfo = new UserInfo({
+  nameSelector: '.profile__user-name',
+  aboutSelector: '.profile__user-job',
+  avatarSelector: '.profile__image',
+})
 
 //рендер дефолтных карточек
 api.getInitialCards()
   .then((data) => {
+    //console.log('загружаются начальные карточки');
     section = new Section({
       items: data,
       renderer: (item) => {
@@ -32,35 +42,36 @@ api.getInitialCards()
       }
     }, config.containerSelector)
     section.renderInitialCards();
+    //console.log('первый консоль лог');
   })
   .catch((error) => {
     console.log(error);
   })
 
-api.getUserInfo(userInfo => {
-  userId = userInfo._id;
-})
+api.getUserInfo()
   .then((data) => {
+    myUserId = data._id;
+    //console.log('загружаются данные юзера');
     profileName.textContent = data.name;
     profileJob.textContent = data.about;
     profileIcon.src = data.avatar;
   })
 
-  const popupAddCard = new PopupWithForm(config.popupCardSelector, (data) => {
-    popupAddCard.renderLoading(true);
-    api.addNewCard(data)
-      .then((cardData) => {
-        addCart(cardData);
+const popupAddCard = new PopupWithForm(config.popupCardSelector, (data) => {
+  popupAddCard.renderLoading(true);
+  api.addNewCard(data)
+    .then((cardData) => {
+      addCart(cardData);
 
-        popupAddCard.close();
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        popupAddCard.renderLoading(false);
-      })
-  });
+      popupAddCard.close();
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {
+      popupAddCard.renderLoading(false);
+    })
+});
 
 const popupEditProfile = new PopupWithForm(config.popupProfileSelector, () => {
   popupEditProfile.renderLoading(true);
@@ -94,20 +105,13 @@ const popupChangeUserPhoto = new PopupWithForm(config.popupUserPhotoSelector, ()
 });
 
 const popupDelete = new PopupWithSubmit(config.popupDeleteSelector, () => {
-  const cardId = popupDelete.cardObject._cardId;
+  const cardId = popupDelete._cardId;
   api.removeCard(cardId)
     .then(() => {
-      popupDelete.cardObject.removeCard();
+      popupDelete.removeCard();
       popupDelete.close();
-      popupDelete.cardObject = '';
     })
 }) // не удаляет пока
-
-const userInfo = new UserInfo({
-  nameSelector: '.profile__user-name',
-  aboutSelector: '.profile__user-job',
-  avatarSelector: '.profile__image',
-})
 
 const popupWithImage = new PopupWithImage(config.popupPhotoSelector);
 const cardFormValidator = new FormValidator(config, popupCardForm);
@@ -119,7 +123,7 @@ const changePhotoValidator = new FormValidator(config, changePhotoForm);
 // рендер карточки
 const createCard = (cardData) => {
   const card = new Card({
-    cardData: { ...cardData, userId},
+    cardData: { ...cardData, myUserId}, // мой айдишник
     handleCardClick: (title, link) => {
       popupWithImage.open(title, link);
     },

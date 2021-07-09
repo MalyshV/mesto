@@ -1,23 +1,28 @@
 class Card {
-  constructor ({ cardData, handleCardClick, handleLikeClick, handleRemoveClick }, templateSelector, /*userId*/) {
+  constructor ({ cardData, handleCardClick, handleLikeClick, handleRemoveClick }, templateSelector) {
     this._cardData = cardData;
     this._title = cardData.name;
     this._link = cardData.link;
-    this._likes = cardData.likes;
-    this.cardId = cardData._id;
-    //this._userId = cardData.userId; // мои данные
+    this._likes = cardData.likes; // массив с поставленными пользователями лайками
+    //console.log(this._likes)
+    this._cardId = cardData._id; // то же самое, что и в this._ownerId...
+    //console.log(this._cardId);
+    this._thisUserId = cardData.myUserId; // мой id
+    this._ownerId = cardData.owner._id; // id любого, кто добавляет карточку
     this._templateSelector = templateSelector;
     this.handleCardClick = handleCardClick;
     this._handleLikeClick = handleLikeClick;
     this._handleRemoveClick = handleRemoveClick;
   }
 
+  // берем разметку темплейта
   _getTemplate() {
     const cardItem = document.querySelector(this._templateSelector).content.querySelector('.element').cloneNode(true);
 
     return cardItem;
   }
 
+  // создаем карточку
   createCard() {
     this._newCard = this._getTemplate();
     this._cardRemoveButton = this._newCard.querySelector('.element__delete-button');
@@ -29,14 +34,16 @@ class Card {
     this._likeCounter = this._newCard.querySelector('.element__like-counter');
 
     this._setEventListeners();
+    this.showAllLikes(); // добавила в карточку количество лайков
 
-    /*if (this._cardData.owner._id !== this._userId) {
-      this._cardRemoveButton.remove(); // из-за этого перестала добавляться новая карточка
-    }*/
+    if (this._ownerId !== this._thisUserId) {
+      this._cardRemoveButton.remove(); // добавляется-удаляется иконка удаления
+    }
 
     return this._newCard;
   }
 
+  // навешиваем листенеры
   _setEventListeners() {
     this._photo.addEventListener('click', () => {
       this.handleCardClick(this._title, this._link);
@@ -46,7 +53,27 @@ class Card {
     //this._cardLikeButton.addEventListener('click', (event) => this._countLikes(event));
   }
 
-  _getLike() {
+  // удаляем карточку - не работает
+  remove() {
+    this._handleRemoveClick(this._cardID, this._newCard);
+  }
+
+  // находим карточку по айди
+  findCardId() {
+    return this._cardId;
+  }
+
+  // дальше можно найти пользователя, лайкнувшего в массиве
+  // закрасить лайк
+  // показать количество лайков
+  showAllLikes() {
+    this._likeCounter.textContent = this._likes.length;
+  }
+
+  // поставить лайк
+
+
+  /*_getLike() {
     this._handleLikeClick(this._userId, this.liked)
       .then((data) => {
         this._cardLikeButton.classList.toggle('element__like-button_active');
@@ -66,7 +93,7 @@ class Card {
       //console.log(likeCounter.textContent);
       //likeCounter.textContent += 1;
     }
-  }
+  }*/
 
   // Тестим счетчик лайков
   /*_countLikes() {
@@ -81,10 +108,6 @@ class Card {
       }
     })
   }*/
-
-  remove() {
-    this._handleRemoveClick(this._cardID, this._newCard);
-  }
 }
 
 export { Card };
