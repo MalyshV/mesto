@@ -4,9 +4,7 @@ class Card {
     this._title = cardData.name;
     this._link = cardData.link;
     this._likes = cardData.likes; // массив с поставленными пользователями лайками
-    //console.log(this._likes)
-    this._cardId = cardData._id; // то же самое, что и в this._ownerId...
-    //console.log(this._cardId);
+    this.cardId = cardData._id;
     this._thisUserId = cardData.myUserId; // мой id
     this._ownerId = cardData.owner._id; // id любого, кто добавляет карточку
     this._templateSelector = templateSelector;
@@ -15,14 +13,12 @@ class Card {
     this._handleRemoveClick = handleRemoveClick;
   }
 
-  // берем разметку темплейта
   _getTemplate() {
     const cardItem = document.querySelector(this._templateSelector).content.querySelector('.element').cloneNode(true);
 
     return cardItem;
   }
 
-  // создаем карточку
   createCard() {
     this._newCard = this._getTemplate();
     this._cardRemoveButton = this._newCard.querySelector('.element__delete-button');
@@ -43,34 +39,38 @@ class Card {
     return this._newCard;
   }
 
-  // навешиваем листенеры
   _setEventListeners() {
     this._photo.addEventListener('click', () => {
       this.handleCardClick(this._title, this._link);
     });
-    this._cardRemoveButton.addEventListener('click', () => this.remove()); // нужен ли аргумент?
-    this._cardLikeButton.addEventListener('click', (event) => this._handleLikeClick(event));
-    //this._cardLikeButton.addEventListener('click', (event) => this._countLikes(event));
+    this._cardRemoveButton.addEventListener('click', () => this._handleRemoveClick(this.cardId));
+    this._cardLikeButton.addEventListener('click', () => this.deleteLike());
+    this._cardLikeButton.addEventListener('click', () => this.setLike());
+    // вернуть handleLikeClick + дописать функционал, чтобы количество лайков отправлялось на сервер
   }
 
-  // удаляем карточку - не работает
   remove() {
-    this._handleRemoveClick(this._cardID, this._newCard);
+    this._newCard.remove();
   }
 
-  // находим карточку по айди
-  findCardId() {
-    return this._cardId;
-  }
-
-  // дальше можно найти пользователя, лайкнувшего в массиве
-  // закрасить лайк
   // показать количество лайков
   showAllLikes() {
     this._likeCounter.textContent = this._likes.length;
   }
 
+  // дальше можно найти пользователя, лайкнувшего в массиве
+
   // поставить лайк
+  setLike() {
+    this._cardLikeButton.classList.add('element__like-button_active');
+    // дописать функцию
+  }
+
+  deleteLike() {
+    this._cardLikeButton.classList.remove('element__like-button_active');
+    // дописать функцию
+  }
+
 
 
   /*_getLike() {

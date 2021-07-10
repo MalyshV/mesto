@@ -1,17 +1,22 @@
 import { Popup } from './Popup.js';
 
-class PopupWithSubmit extends Popup { // не идет, переделать
-    setOnSubmit(action) {
-      this._handleRemoveClick = action;
-    }
-    // хендлер удаления карточки??
+class PopupWithSubmit extends Popup {
+  constructor(popupSelector) {
+    super(popupSelector);
+    this._submitButton = this._popupItem.querySelector('.input-container__button');
+  }
 
-    //this._submitButton = this._popupItem.querySelector('.input-container__button');
+  setOnSubmit(submit) {
+    this._handleRemoveClick = submit;
+  }
 
   setEventListeners() {
+    this._submitButton.addEventListener('click', () => {
+      this._handleRemoveClick();
+    });
     this._popupItem.addEventListener('submit', (event) => {
       event.preventDefault();
-      this._handleRemoveClick();
+      this.setOnSubmit(action);
     });
 
     super.setEventListeners();

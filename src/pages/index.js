@@ -9,6 +9,14 @@ import { PopupWithSubmit } from '../components/popupWithSubmit.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { Api } from '../components/Api.js';
 
+let myUserId;
+let section;
+
+const userInfo = new UserInfo({
+  nameSelector: '.profile__user-name',
+  aboutSelector: '.profile__user-job',
+  avatarSelector: '.profile__image',
+})
 
 // Classes:
 const api = new Api({
@@ -18,44 +26,6 @@ const api = new Api({
     'Content-Type': 'application/json'
   }
 });
-
-api.waitPromise(); // проверила через несколько консоль.логов, первыми загружаются данные юзера
-
-let myUserId = null;
-let section;
-
-// данные пользователя
-const userInfo = new UserInfo({
-  nameSelector: '.profile__user-name',
-  aboutSelector: '.profile__user-job',
-  avatarSelector: '.profile__image',
-})
-
-//рендер дефолтных карточек
-api.getInitialCards()
-  .then((data) => {
-    //console.log('загружаются начальные карточки');
-    section = new Section({
-      items: data,
-      renderer: (item) => {
-        addCart(item);
-      }
-    }, config.containerSelector)
-    section.renderInitialCards();
-    //console.log('первый консоль лог');
-  })
-  .catch((error) => {
-    console.log(error);
-  })
-
-api.getUserInfo()
-  .then((data) => {
-    myUserId = data._id;
-    //console.log('загружаются данные юзера');
-    profileName.textContent = data.name;
-    profileJob.textContent = data.about;
-    profileIcon.src = data.avatar;
-  })
 
 const popupAddCard = new PopupWithForm(config.popupCardSelector, (data) => {
   popupAddCard.renderLoading(true);
@@ -104,15 +74,7 @@ const popupChangeUserPhoto = new PopupWithForm(config.popupUserPhotoSelector, ()
    })
 });
 
-const popupDelete = new PopupWithSubmit(config.popupDeleteSelector, () => {
-  const cardId = popupDelete._cardId;
-  api.removeCard(cardId)
-    .then(() => {
-      popupDelete.removeCard();
-      popupDelete.close();
-    })
-}) // не удаляет пока
-
+const popupDelete = new PopupWithSubmit(config.popupDeleteSelector);
 const popupWithImage = new PopupWithImage(config.popupPhotoSelector);
 const cardFormValidator = new FormValidator(config, popupCardForm);
 const profileFormValidator = new FormValidator(config, formElement);
@@ -120,29 +82,47 @@ const changePhotoValidator = new FormValidator(config, changePhotoForm);
 
 
 // Functions:
-// рендер карточки
+api.waitPromise(); // проверила через несколько консоль.логов, первыми загружаются данные юзера
+
+api.getInitialCards() // правильно ли так после вызова waitPromise?...
+  .then((data) => {
+    section = new Section({
+      items: data,
+      renderer: (item) => {
+        addCart(item);
+      }
+    }, config.containerSelector)
+    section.renderInitialCards();
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+
+api.getUserInfo()
+  .then((data) => {
+    myUserId = data._id;
+    profileName.textContent = data.name;
+    profileJob.textContent = data.about;
+    profileIcon.src = data.avatar;
+  })
+
 const createCard = (cardData) => {
   const card = new Card({
     cardData: { ...cardData, myUserId}, // мой айдишник
     handleCardClick: (title, link) => {
       popupWithImage.open(title, link);
     },
-    handleRemoveClick: (cardId, cardItem) => { // переделать хендлер
+    handleRemoveClick: (cardId) => {
       popupDelete.open();
-      popupDelete.setonSubmit(() => {
-        popupDelete.renderLoading(true)
+      popupDelete.setOnSubmit(() => {
         api.removeCard(cardId)
-          .then(res => {
-            if(res.ok) {
+          .then(() => {
               return cardItem.remove();
-            }
-            return Promise.reject('Ошибка')
           })
           .catch((error) => {
             console.log(error);
           })
           .finally(() => {
-            popupDelete.renderLoading(false);
             popupDelete.close();
           })
       })
@@ -154,7 +134,7 @@ const createCard = (cardData) => {
   return cardItem;
 };
 
-function addCart(item){
+function addCart(item) {
   const cardItem = createCard(item);
         section.addItem(cardItem);
 }

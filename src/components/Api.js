@@ -4,7 +4,6 @@ class Api {
     this._headers = config.headers;
   }
 
-  // загрузка информации о пользователе с сервера
   getUserInfo() {
     return fetch(`${this._baseUrl}users/me`, {
       method: 'GET',
@@ -18,7 +17,6 @@ class Api {
     });
   }
 
-  // редактирование профиля и отправка на сервер
   setUserInfo(data) {
     return fetch(`${this._baseUrl}users/me`, {
       method: 'PATCH',
@@ -36,7 +34,6 @@ class Api {
     });
   }
 
-  // обновление аватара пользователя
   setUserAvatar(data) {
     return fetch(`${this._baseUrl}users/me/avatar`, {
       method: 'PATCH',
@@ -53,7 +50,6 @@ class Api {
     });
   }
 
-  // загрузка карточек с сервера
   getInitialCards() {
     return fetch(`${this._baseUrl}cards`, {
       method: 'GET',
@@ -67,7 +63,6 @@ class Api {
     });
   }
 
-  // добавление новой карточки на сервер
   addNewCard(data) {
     return fetch(`${this._baseUrl}cards`, {
       method: 'POST',
@@ -85,7 +80,6 @@ class Api {
     });
   }
 
-  // удаление карточки
   removeCard(cardId) {
     return fetch(`${this._baseUrl}cards/${cardId}`, {
       method: 'DELETE',
@@ -99,7 +93,6 @@ class Api {
     });
   }
 
-  // поставить лайк
   setlike(id) {
     return fetch(`${this._baseUrl}cards/likes/${id}`, {
       method: 'PUT',
@@ -113,7 +106,6 @@ class Api {
     });
   }
 
-  // удалить лайк
   removeLike(id) {
     return fetch(`${this._baseUrl}cards/likes/${id}`, {
       method: 'DELETE',
@@ -136,4 +128,3 @@ export { Api };
 
 // мой токен: 61426457-aa06-4805-b055-d8aeddd40fb8
 // идентификатор группы: cohort-25
-
