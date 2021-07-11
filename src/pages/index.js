@@ -82,9 +82,9 @@ const changePhotoValidator = new FormValidator(config, changePhotoForm);
 
 
 // Functions:
-api.waitPromise(); // проверила через несколько консоль.логов, первыми загружаются данные юзера
+api.waitPromise();
 
-api.getInitialCards() // правильно ли так после вызова waitPromise?...
+api.getInitialCards()
   .then((data) => {
     section = new Section({
       items: data,
@@ -108,7 +108,7 @@ api.getUserInfo()
 
 const createCard = (cardData) => {
   const card = new Card({
-    cardData: { ...cardData, myUserId}, // мой айдишник
+    cardData: { ...cardData, myUserId},
     handleCardClick: (title, link) => {
       popupWithImage.open(title, link);
     },
@@ -127,10 +127,35 @@ const createCard = (cardData) => {
           })
       })
     },
-    // handleLikeClick:
+    likeCard: (cardId) => {
+      api.setlike(cardId)
+        .then((data) => {
+          return data.likes.length
+        })
+        .then((data) => {
+          card.showAllLikes(data)
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    },
+    unLikeCard: (cardId) => {
+      api.removeLike(cardId)
+        .then((data) => {
+          return data.likes.lenght
+        })
+        .then((data) => {
+          card.showAllLikes(data)
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    }
+
     }, config.templateSelector);
 
   const cardItem = card.createCard();
+
   return cardItem;
 };
 

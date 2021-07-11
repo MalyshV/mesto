@@ -6,8 +6,8 @@ class PopupWithSubmit extends Popup {
     this._submitButton = this._popupItem.querySelector('.input-container__button');
   }
 
-  setOnSubmit(submit) {
-    this._handleRemoveClick = submit;
+  setOnSubmit(event) {
+    this._handleRemoveClick = event;
   }
 
   setEventListeners() {
@@ -16,7 +16,7 @@ class PopupWithSubmit extends Popup {
     });
     this._popupItem.addEventListener('submit', (event) => {
       event.preventDefault();
-      this.setOnSubmit(action);
+      this.setOnSubmit(event);
     });
 
     super.setEventListeners();
