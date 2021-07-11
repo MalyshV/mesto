@@ -142,7 +142,7 @@ const createCard = (cardData) => {
     unLikeCard: (cardId) => {
       api.removeLike(cardId)
         .then((data) => {
-          return data.likes.lenght
+          return data.likes.length
         })
         .then((data) => {
           card.showAllLikes(data)
