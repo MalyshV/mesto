@@ -130,10 +130,10 @@ const createCard = (cardData) => {
     likeCard: (cardId) => {
       api.setlike(cardId)
         .then((data) => {
-          return data.likes.length
+          return data.likes.length;
         })
         .then((data) => {
-          card.showAllLikes(data)
+          card.showAllLikes(data);
         })
         .catch((error) => {
           console.log(error);
@@ -142,20 +142,17 @@ const createCard = (cardData) => {
     unLikeCard: (cardId) => {
       api.removeLike(cardId)
         .then((data) => {
-          return data.likes.length
+          return data.likes.length;
         })
         .then((data) => {
-          card.showAllLikes(data)
+          card.showAllLikes(data);
         })
         .catch((error) => {
           console.log(error);
         })
-    }
-
-    }, config.templateSelector);
+    }}, config.templateSelector);
 
   const cardItem = card.createCard();
-
   return cardItem;
 };
 
