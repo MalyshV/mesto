@@ -9,12 +9,7 @@ class Api {
       method: 'GET',
       headers: this._headers,
   })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+  .then(this._checkRespons);
   }
 
   setUserInfo(data) {
@@ -26,12 +21,7 @@ class Api {
         about: data.about,
       })
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._checkRespons);
   }
 
   setUserAvatar(data) {
@@ -42,12 +32,7 @@ class Api {
         avatar: data.link,
       })
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._checkRespons);
   }
 
   getInitialCards() {
@@ -55,12 +40,7 @@ class Api {
       method: 'GET',
       headers: this._headers,
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._checkRespons);
   }
 
   addNewCard(data) {
@@ -72,12 +52,7 @@ class Api {
         link: data.link,
       })
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._checkRespons);
   }
 
   removeCard(cardId) {
@@ -85,12 +60,7 @@ class Api {
       method: 'DELETE',
       headers: this._headers,
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._checkRespons);
   }
 
   setlike(cardId) {
@@ -98,12 +68,7 @@ class Api {
       method: 'PUT',
       headers: this._headers,
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._checkRespons);
   }
 
   removeLike(cardId) {
@@ -111,16 +76,19 @@ class Api {
       method: 'DELETE',
       headers: this._headers,
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    .then(this._checkRespons);
   }
 
   waitPromise() {
     return Promise.all([this.getUserInfo(), this.getInitialCards()]);
+  }
+
+
+_checkRespons(res) {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Ошибка: ${res.status}`);
   }
 }
 
