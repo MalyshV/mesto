@@ -108,7 +108,7 @@ api.getUserInfo()
 
 const createCard = (cardData) => {
   const card = new Card({
-    cardData: { ...cardData, myUserId},
+    cardData: { ...cardData, myUserId },
     handleCardClick: (title, link) => {
       popupWithImage.open(title, link);
     },
