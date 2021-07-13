@@ -13,7 +13,6 @@ class FormValidator {
         this.toggleButtonState();
       });
     })
-    this.toggleButtonState(this._buttonElement, this._inputList);
   }
 
   _hasInvalidInput() {
