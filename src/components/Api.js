@@ -79,16 +79,16 @@ class Api {
     .then(this._checkRespons);
   }
 
-  waitPromise() {
+  loadData() {
     return Promise.all([this.getUserInfo(), this.getInitialCards()]);
   }
 
 
-_checkRespons(res) {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(`Ошибка: ${res.status}`);
+  _checkRespons(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
   }
 }
 
