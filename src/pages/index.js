@@ -32,7 +32,6 @@ const popupAddCard = new PopupWithForm(config.popupCardSelector, (data) => {
   api.addNewCard(data)
     .then((cardData) => {
       addCart(cardData);
-
       popupAddCard.close();
     })
     .catch((error) => {
@@ -48,6 +47,7 @@ const popupEditProfile = new PopupWithForm(config.popupProfileSelector, () => {
   api.setUserInfo({name: nameInput.value, about: jobInput.value})
    .then((data) => {
      userInfo.setUserInfo(data);
+     popupEditProfile.close();
    })
    .catch((error) => {
      console.log(error);
@@ -55,8 +55,6 @@ const popupEditProfile = new PopupWithForm(config.popupProfileSelector, () => {
    .finally(() => {
     popupEditProfile.renderLoading(false);
   })
-
-  popupEditProfile.close();
 });
 
 const popupChangeUserPhoto = new PopupWithForm(config.popupUserPhotoSelector, () => {
@@ -105,6 +103,9 @@ api.getUserInfo()
     profileJob.textContent = data.about;
     profileIcon.src = data.avatar;
   })
+  .catch((error) => {
+    console.log(error);
+  })
 
 const createCard = (cardData) => {
   const card = new Card({
@@ -117,13 +118,11 @@ const createCard = (cardData) => {
       popupDelete.setOnSubmit(() => {
         api.removeCard(cardId)
           .then(() => {
-              return cardItem.remove();
+            popupDelete.close();
+            return cardItem.remove();
           })
           .catch((error) => {
             console.log(error);
-          })
-          .finally(() => {
-            popupDelete.close();
           })
       })
     },
