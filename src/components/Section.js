@@ -10,8 +10,8 @@ class Section {
     this._element.prepend(domElement);
   }
 
-  renderInitialCards() {
-    this._items.forEach(item => this._renderer(item));
+  renderInitialCards(items) {
+    items.forEach(item => this._renderer(item));
   }
 }
 

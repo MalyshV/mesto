@@ -10,14 +10,14 @@ import { UserInfo } from '../components/UserInfo.js';
 import { Api } from '../components/Api.js';
 
 let myUserId;
-let section;
 
 const userInfo = new UserInfo({
   nameSelector: '.profile__user-name',
   aboutSelector: '.profile__user-job',
   avatarSelector: '.profile__image',
   // тут про id не надо?
-})
+});
+
 
 // Classes:
 const api = new Api({
@@ -27,6 +27,12 @@ const api = new Api({
     'Content-Type': 'application/json'
   }
 });
+
+const section = new Section({
+  renderer: (item) => {
+    addCart(item);
+  }
+}, config.containerSelector);
 
 const popupAddCard = new PopupWithForm(config.popupCardSelector, (data) => {
   popupAddCard.renderLoading(true);
@@ -83,18 +89,11 @@ const changePhotoValidator = new FormValidator(config, changePhotoForm);
 // Functions:
 api.loadData()
   .then(([userData, cardsData]) => {
-    myUserId = userData._id; // - можно ли сократить с помощью метода класса?
-    profileName.textContent = userData.name;
-    profileJob.textContent = userData.about;
-    profileIcon.src = userData.avatar;
+    userInfo.setUserInfo(userData);
 
-    section = new Section({ // - можно ли сократить с помощью метода класса?
-      items: cardsData,
-      renderer: (item) => {
-        addCart(item);
-      }
-    }, config.containerSelector)
-    section.renderInitialCards();
+    myUserId = userData._id;
+
+    section.renderInitialCards(cardsData);
   })
   .catch((error) => {
     console.log(error);
