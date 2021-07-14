@@ -1,5 +1,5 @@
 import './index.css';
-import { formElement, popupCardForm, popupCardOpenButton, popupProfileOpenButton, nameInput, jobInput, config, changePhotoForm, profileName, profileJob, profileIcon, avatarInput } from '../utils/constants.js';
+import { formElement, popupCardForm, popupCardOpenButton, popupProfileOpenButton, nameInput, jobInput, config, changePhotoForm, profileIcon } from '../utils/constants.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
@@ -10,13 +10,6 @@ import { UserInfo } from '../components/UserInfo.js';
 import { Api } from '../components/Api.js';
 
 let myUserId;
-
-const userInfo = new UserInfo({
-  nameSelector: '.profile__user-name',
-  aboutSelector: '.profile__user-job',
-  avatarSelector: '.profile__image',
-  // тут про id не надо?
-});
 
 
 // Classes:
@@ -34,6 +27,12 @@ const section = new Section({
   }
 }, config.containerSelector);
 
+const userInfo = new UserInfo({
+  nameSelector: '.profile__user-name',
+  aboutSelector: '.profile__user-job',
+  avatarSelector: '.profile__image',
+});
+
 const popupAddCard = new PopupWithForm(config.popupCardSelector, (data) => {
   popupAddCard.renderLoading(true);
   api.addNewCard(data)
@@ -49,9 +48,9 @@ const popupAddCard = new PopupWithForm(config.popupCardSelector, (data) => {
     })
 });
 
-const popupEditProfile = new PopupWithForm(config.popupProfileSelector, () => {
+const popupEditProfile = new PopupWithForm(config.popupProfileSelector, (data) => {
   popupEditProfile.renderLoading(true);
-  api.setUserInfo({name: nameInput.value, about: jobInput.value})
+  api.setUserInfo(data)
    .then((data) => {
      userInfo.setUserInfo(data);
      popupEditProfile.close();
@@ -64,9 +63,9 @@ const popupEditProfile = new PopupWithForm(config.popupProfileSelector, () => {
   })
 });
 
-const popupChangeUserPhoto = new PopupWithForm(config.popupUserPhotoSelector, () => {
+const popupChangeUserPhoto = new PopupWithForm(config.popupUserPhotoSelector, (data) => {
   popupChangeUserPhoto.renderLoading(true);
-  api.setUserAvatar({link: avatarInput.value})
+  api.setUserAvatar(data)
     .then((data) => {
       userInfo.setUserAvatar(data);
       popupChangeUserPhoto.close();
